@@ -1,0 +1,39 @@
+{
+  "name": "pie",
+  "version": "1.0.0",
+  "description": "Schedule your time with a clock",
+  "main": "index.js",
+  "scripts": {
+    "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel watch src/index.html --public-url '.' --no-cache",
+    "startBackground": "parcel watch src/background.js --no-cache",
+    "build": "rm -r dist && parcel build src/index.html --public-url '.' && parcel build src/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist",
+    "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getPie/Pie.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/getPie/Pie/issues"
+  },
+  "homepage": "https://github.com/getPie/Pie#readme",
+  "dependencies": {
+    "ch": "^0.3.0",
+    "chrome-storage-promise": "^0.1.0",
+    "dateformat": "^3.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "mocha": "^5.2.0",
+    "node-sass": "^4.9.2",
+    "should": "^13.2.3"
+  }
+}
