@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel watch src/index.html --public-url '.' --no-cache",
     "startBackground": "parcel watch src/background.js --no-cache",
-    "build": "rm -r dist && parcel build src/index.html --public-url '.' && parcel build src/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist",
+    "build": "rm -r dist && parcel build src/index.html --public-url '.' && parcel build src/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && npm run packDisk",
+    "packDisk": "crx pack dist -o extension.crx",
     "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'"
   },
   "repository": {
@@ -32,6 +33,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
+    "crx": "^3.2.1",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "should": "^13.2.3"

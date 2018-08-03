@@ -1,6 +1,9 @@
 # Tomato pie
 Schedule your time with a clock
 
+## Usage
+
+
 ## Develop
 
 1. Load extension to chrome
@@ -79,3 +82,7 @@ At first I want to write this app in valina js, one hard thing to implement is t
 - https://chrome.google.com/webstore/detail/timer-25-the-minimalist-t/gmdbcklinofignhfmibchnmgjcocccbh
 
 成长的表现是会对更小的创新感到激动，因为明白了更大的创新很难？
+
+
+## Tools
+- chart: https://github.com/apexcharts/apexcharts.js

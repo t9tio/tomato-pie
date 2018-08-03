@@ -1,4 +1,7 @@
 .cache
+extension.crx
+dist
+.DS_Store
 # Logs
 logs
 *.log
