@@ -11,7 +11,7 @@ let rest = 5;
 let currentTimeout = undefined;
 let restTimeout = undefined;
 
-function updateCurrent () {
+async function updateCurrent () {
     if (current === 0) {
         rest = 5;
         updateRest();
@@ -23,12 +23,18 @@ function updateCurrent () {
             // requireInteraction: true,  // do not close until click
             eventTime: Date.now() + 1000 * 10,
         });
+
+        const startAt = await store.CurrentStartAt.get();
+        await store.Tomato.add({
+            startAt,
+        });
+
     } else {
         console.log('updateCurrent')
         chrome.browserAction.setBadgeText({ text: current.toString() + "m" });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
         current = current - 1;
-        currentTimeout = setTimeout(() => updateCurrent(), 1000 * 60);
+        currentTimeout = setTimeout(async () => await updateCurrent(), 1000 * 60);
     }
 }
 
@@ -46,18 +52,6 @@ async function updateRest () {
             }],
         });
 
-        // TODO: add tomato to history
-        // startTime, date, description
-        // store.addTomato({
-        //     startTimme: 21,
-        //     date: '2018-07-27',
-        //     tag: 'tomato pie',
-        //     description: 'css'
-        // });
-        const startAt = await store.CurrentStartAt.get();
-        await store.Tomato.add({
-            startAt,
-        });
 
         await store.CurrentStartAt.put(null);
         // TODO: Improvement: If there's already an empty, switch to it instead of creating a new one. 
@@ -67,7 +61,7 @@ async function updateRest () {
         chrome.browserAction.setBadgeText({ text: rest.toString() + "m" });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'green'});
         rest = rest - 1;
-        restTimeout = setTimeout(() => updateRest(), 1000 * 60);
+        restTimeout = setTimeout(async () => await updateRest(), 1000 * 60);
     }
 }
 

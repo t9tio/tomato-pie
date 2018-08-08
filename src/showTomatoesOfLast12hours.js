@@ -1,11 +1,3 @@
-// .tomato3 {
-//     position: absolute;
-//     z-index: 6;
-//     margin: 113px 114px; 
-//     transform: rotate(75deg) translateY(-140px);
-//     width: 1.6rem;
-// }
-
 /**
  * pass an array of tomatos, show the tomatos of last 12 hours
  * @param tomatoesMightNeedToShow {Array} array of tomatoes

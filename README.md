@@ -3,6 +3,8 @@ Schedule your time with a clock
 
 ## Usage
 
+## competitors
+- http://slimtimer.com/
 
 ## Develop
 
@@ -20,6 +22,11 @@ Schedule your time with a clock
 - [x] click start tomato: start timmer on page
 - [x] update icon time
 - [x] parcel build ok but not parcel index.html -- use `parcel index.html --no-cache` instead
+- [x] got tomato after 25 min instead of 30 min
+- [ ] update datastucture
+- [ ] add todo list
+- [ ] show today's tomato instead of last 24 hours
+- [ ] add UI for in validate tomato
 - [ ] historical tomatos
     - [x] add tomato
     - [ ] get today and yesterday's tomato and rander them
@@ -28,9 +35,9 @@ Schedule your time with a clock
     - [x] watch background updates and better way to export functions from background.js (by assign property to `window`) 
     - [ ] move all the data to store? implement historical tomato first
 - [ ] when 25 minutes ends: ask user if the tomato is valid and what has he done as description
-- when 30 minutes ends: stop timmer; pop up new page; ask if user want to continue
-- How to store tomatos: one key for each day
-- get recent 2 days' tomatos and render clock
+- [ ] when 30 minutes ends: stop timmer; pop up new page; ask if user want to start a new tomato on the same topic
+- [x] How to store tomatos: one key for each day
+- [x] get recent 2 days' tomatos and render clock
 
 ### Analization page
 - 

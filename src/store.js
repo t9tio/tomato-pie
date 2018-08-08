@@ -1,6 +1,22 @@
 import 'chrome-storage-promise';
 import getFormatedDateStr from './util/getFormatedDateStr';
 
+/**
+ * Data structure
+ * [{
+ *     "2018-08-07": {
+ *         tomatoes: [{
+ *             startAt: 1533653542468,
+ *             abandonReason: "拉大便",
+ *         }],
+ *         todoList: [{
+ *             content: "master css position",
+ *             tomatoIndexes: [0],
+ *         }]
+ *     }
+ * }]
+ */
+
 const CurrentStartAt = {
     get: async () => {
         const storage = await chrome.storage.promise.sync.get('currentStartAt');
