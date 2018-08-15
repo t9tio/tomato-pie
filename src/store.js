@@ -2,19 +2,23 @@ import 'chrome-storage-promise';
 import getFormatedDateStr from './util/getFormatedDateStr';
 
 /**
- * Data structure
- * [{
- *     "2018-08-07": {
- *         tomatoes: [{
- *             startAt: 1533653542468,
- *             abandonReason: "拉大便",
- *         }],
- *         todoList: [{
- *             content: "master css position",
- *             tomatoIndexes: [0],
- *         }]
- *     }
- * }]
+ * store data structure
+ * {
+ *     "tomatoes-2018-08-07": [{
+ *         startAt: 1533653542468, // also used as id
+ *         abandonReason: "拉大便", // abandoned if not undefined
+ *         todoId: "abc",
+ *     }],
+ * 
+ * 
+ *     "todoList-2018-08-07": [{
+ *         createdAt: 1533653542468 // also used as id
+ *         content: "master css position",
+ *         isDone: fasle,
+ *     }],
+ * 
+ *     "emergencyList?"
+ * }
  */
 
 const CurrentStartAt = {
@@ -32,34 +36,60 @@ const CurrentStartAt = {
 };
 
 const Tomato = {
-    add: async ({ startAt, tag, description }) => {
-        const dateStr = getFormatedDateStr(new Date(startAt));
-        const tomatoToday = (await chrome.storage.promise.sync.get(dateStr))[dateStr];
+    getByDate: async (date) => {
+        const dateStr = getFormatedDateStr(date);
+        const tomatoesKey = `tomatoes-${dateStr}`;
+        let tomatoes = (await chrome.storage.promise.sync.get(tomatoesKey))[tomatoesKey];
 
-        if (tomatoToday) {
-            tomatoToday.push({
-                startAt,
-                tag,
-                description,
-            });
-
+        // init tomatoes if no tomato fond
+        if (!tomatoes) {
+            tomatoes = [];
             const obj = {};
-            obj[dateStr] = tomatoToday;
-            await chrome.storage.promise.sync.set(obj);
-        } else {
-            const obj = {};
-            obj[dateStr] = [{
-                startAt,
-                tag,
-                description,
-            }];
+            obj[tomatoesKey] = tomatoes;
             await chrome.storage.promise.sync.set(obj);
         }
+
+        return tomatoes;
     },
 
-    getByDateStr: async (dateStr) => {
-        const tomatoes = (await chrome.storage.promise.sync.get(dateStr))[dateStr];
+    putByDate: async (date, tomatoes) => {
+        const dateStr = getFormatedDateStr(date);
+        const tomatoesKey = `tomatoes-${dateStr}`;
+        const obj = {};
+        obj[tomatoesKey] = tomatoes;
+        await chrome.storage.promise.sync.set(obj);
         return tomatoes;
+    },
+};
+
+const TodoList = {
+    getByDate: async (date) => {
+        const dateStr = getFormatedDateStr(date);
+        const todoListKey = `todoList-${dateStr}`;
+        let todoList = (await chrome.storage.promise.sync.get(todoListKey))[todoListKey];
+
+        // init todoList if no todo fond
+        if (!todoList) {
+            todoList = [];
+            const obj = {};
+            obj[todoListKey] = todoList;
+            await chrome.storage.promise.sync.set(obj);
+        }
+    
+        return todoList;
+    },
+
+    /**
+     * @param date {Object} date obj
+     * @param todoList {Array} [{id: '', content: ''}]
+     */
+    putByDate: async (date, todoList) => {
+        const dateStr = getFormatedDateStr(date);
+        const todoListKey = `todoList-${dateStr}`;
+        const obj = {};
+        obj[todoListKey] = todoList;
+        await chrome.storage.promise.sync.set(obj);
+        return todoList;
     },
 };
 
@@ -67,4 +97,5 @@ const Tomato = {
 export default {
     CurrentStartAt,
     Tomato,
+    TodoList,
 }

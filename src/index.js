@@ -1,16 +1,13 @@
-import './index.scss';
-import './generateClockAnimations';
-import minuteAnimation from './minuteAnimation';
+import './styles/index.scss';
+import './styles/todo.scss';
+import './util/generateClockAnimations';
+import minuteAnimation from './util/minuteAnimation';
 import store from './store';
-import getFormatedDateStr from './util/getFormatedDateStr';
-import showTomatoesOfLast12hours from './showTomatoesOfLast12hours';
-
-// communicate with background page: https://stackoverflow.com/a/11967860/4674834
-const backgroundPage = chrome.extension.getBackgroundPage();
-
-console.log(backgroundPage);
+import showTodoListAndTomatoes from './util/showTodoListAndTomatoes';
 
 (async () => {
+
+    // show minuteAnimation and set extension badge if there is tomato running
     const currentStartAt = await store.CurrentStartAt.get();
     if (currentStartAt && new Date().getTime() - currentStartAt < 1000 * 60 * 30) {
         minuteAnimation.show(currentStartAt);
@@ -19,32 +16,28 @@ console.log(backgroundPage);
         chrome.browserAction.setBadgeText({ text: '' });
     }
 
+    // show todoList and tomatoes today
     const today = new Date();
-    const yesterday = new Date().setDate(today.getDate() - 1);
-    const todayStr = getFormatedDateStr(today);
-    const yesterdayStr = getFormatedDateStr(yesterday);
-    const tomatoesToday = await store.Tomato.getByDateStr(todayStr);
-    const tomatoesYesterday = await store.Tomato.getByDateStr(yesterdayStr);
-    
-    const tomatoesMightNeedToShow = [];
-    if (Array.isArray(tomatoesToday)) {
-        tomatoesMightNeedToShow.push(...tomatoesToday);
-    }
-
-    if (Array.isArray(tomatoesYesterday)) {
-        tomatoesMightNeedToShow.push(...tomatoesYesterday);
-    }
-
-    showTomatoesOfLast12hours(tomatoesMightNeedToShow);
+    const tomatoesToday = await store.Tomato.getByDate(today);
+    const todoListToday = await store.TodoList.getByDate(today);
+    await showTodoListAndTomatoes(todoListToday, tomatoesToday);
 })();
 
-document.querySelector('#start-tomato').addEventListener('click', async () => {
-    const startTime = new Date().getTime();
+// add todo
+document.querySelector('#input').addEventListener('keyup', async (e) => {
+    const content = document.getElementById('input').value;
+    if (e.keyCode === 13 && content) {
+        const today = new Date();
+        const todoList = await store.TodoList.getByDate(today);
+        todoList.push({
+            createdAt: new Date().getTime(),
+            content,
+            isDone: false,
+        });
+        const newList = await store.TodoList.putByDate(today, todoList);
+        const tomatoes = await store.Tomato.getByDate(today);
+        await showTodoListAndTomatoes(newList, tomatoes);
 
-    chrome.browserAction.setBadgeText({ text: '25m' });
-    chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
-
-    await store.CurrentStartAt.put(startTime);
-    minuteAnimation.show(startTime);
-    backgroundPage.startTimmer();
+        document.getElementById('input').value = '';
+    }
 });

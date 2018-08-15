@@ -1,0 +1,95 @@
+ul {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+li {
+    // text-align: left;
+    position: relative;
+    font-size: 15px; 
+    list-style: none;
+    width: 450px;
+    margin: 0;
+    border: 0;
+}
+
+
+li:hover {
+    background-color: rgba(0, 0, 0 , 0.04);
+    cursor: move;
+}
+
+.checkbox {
+    font-size: 25px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 12px;
+}
+
+.content-div {
+    display: inline-block;
+    vertical-align: top;
+    width: 270px;
+    height: auto;
+    // word-wrap: break-word;
+    // word-break: break-all;
+    // overflow: hidden;
+    text-align: left;
+    // padding-left: 1px;
+    outline: 0;
+    border-bottom: solid 1px #ddd;
+    // border-top: solid 1px #ddd;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-div:hover {
+    cursor: text;
+}
+
+.content-div.done {
+    // text-decoration: line-through; 
+    color: #999;
+}
+
+.todo-tomato {
+    display: inline;
+    padding-top: 10px;
+}
+
+.add-tomato-btn {
+    display: none;
+    position: absolute;
+    right: 150px;
+    top: 10px;
+    border-radius: 50%;
+    outline: 0;
+}
+
+.add-tomato-btn:hover {
+    cursor: pointer;
+}
+//   li:hover {
+//     text-decoration: line-through;
+//   }
+
+#input-div {
+    width: 270px;
+    margin-top: 10px;
+    margin-left: 32px;
+    border-bottom: solid 1px #ddd;
+}
+
+#input {
+    display: inline-block;
+    font-size: 15px;
+    border: 0;
+    width: 270px;
+    padding-bottom: 10px;
+    padding-top: 0;
+}
+
+#input:focus {
+    outline: none;
+}

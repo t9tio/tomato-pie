@@ -24,7 +24,8 @@
   "dependencies": {
     "ch": "^0.3.0",
     "chrome-storage-promise": "^0.1.0",
-    "dateformat": "^3.0.3"
+    "dateformat": "^3.0.3",
+    "sortablejs": "^1.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

@@ -15,6 +15,8 @@ Schedule your time with a clock
 
 ## Architecture
 
+store ==> render function ==> view =update=> store
+
 ### Tomato page
 - [x] new tab: activate background page
 - [x] new tab: get current tomato from storage
@@ -25,7 +27,7 @@ Schedule your time with a clock
 - [x] got tomato after 25 min instead of 30 min
 - [ ] update datastucture
 - [ ] add todo list
-- [ ] show today's tomato instead of last 24 hours
+- [x] show today's tomato instead of last 24 hours
 - [ ] add UI for in validate tomato
 - [ ] historical tomatos
     - [x] add tomato

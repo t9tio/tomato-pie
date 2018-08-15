@@ -2,8 +2,38 @@ import store from './store';
 
 // open new tab when click ico
 // ref: https://stackoverflow.com/questions/3188384/google-chrome-extensions-open-new-tab-when-clicking-a-toolbar-icon
-chrome.browserAction.onClicked.addListener(function() {
+chrome.browserAction.onClicked.addListener(() => {
     chrome.tabs.create({});
+});
+
+// open new tab when click notification
+chrome.notifications.onClicked.addListener(() => {
+    chrome.tabs.create({});
+});
+
+chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
+    const today = new Date();
+    const tomatoes = await store.Tomato.getByDate(today);
+    const lastTomato = tomatoes[tomatoes.length - 1];
+
+    // start another tomato for current todo directly
+    if (buttonIndex === 0) {
+        const startTime = today.getTime();
+        const newTomato = {
+            startAt: startTime,
+            todoId: lastTomato.todoId,
+        };
+        tomatoes.push(newTomato);
+        await store.CurrentStartAt.put(startTime);
+        await store.Tomato.putByDate(today, tomatoes);
+        chrome.browserAction.setBadgeText({ text: '25m' });
+        chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
+        startTimmer();
+    // abandon current tomato
+    } else if (buttonIndex === 1) {
+        lastTomato.abandonReason = '';
+        await store.Tomato.putByDate(today, tomatoes);
+    }
 });
 
 let current = 25;
@@ -24,10 +54,10 @@ async function updateCurrent () {
             eventTime: Date.now() + 1000 * 10,
         });
 
-        const startAt = await store.CurrentStartAt.get();
-        await store.Tomato.add({
-            startAt,
-        });
+        // const startAt = await store.CurrentStartAt.get();
+        // await store.Tomato.add({
+        //     startAt,
+        // });
 
     } else {
         console.log('updateCurrent')
@@ -48,7 +78,9 @@ async function updateRest () {
             message: (new Date()).toLocaleTimeString(),
             requireInteraction: true,  // do not close until click
             buttons: [{
-                title: 'Start another tomato directly',
+                title: 'Start another tomato for current todo directly',
+            }, {
+                title: 'Abandon this tomato'
             }],
         });
 
@@ -65,8 +97,7 @@ async function updateRest () {
     }
 }
 
-// export function from background page (load in other place by `chrome.extension.getBackgroundPage();`)
-window.startTimmer = function () {
+function startTimmer() {
     current = 25;
     rest = 5;
 
@@ -76,7 +107,5 @@ window.startTimmer = function () {
     updateCurrent();
 }
 
-// When user want to start another tomato directly
-chrome.notifications.onButtonClicked.addListener((notificationId, buttonIndex) => {
-    console.log(notificationId, buttonIndex);
-});
+// export function from background page (load in other place by `chrome.extension.getBackgroundPage();`)
+window.startTimmer = startTimmer;
