@@ -25,6 +25,7 @@
     "ch": "^0.3.0",
     "chrome-storage-promise": "^0.1.0",
     "dateformat": "^3.0.3",
+    "driver.js": "^0.7.1",
     "sortablejs": "^1.7.0"
   },
   "devDependencies": {
@@ -35,6 +36,9 @@
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "crx": "^3.2.1",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.9.2",
     "should": "^13.2.3"

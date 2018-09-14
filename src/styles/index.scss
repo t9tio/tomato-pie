@@ -1,165 +1,168 @@
 // 元素的内边距和边框不再会增加它的宽度, do math on padding/border/margin is not interesting
 // http://zh.learnlayout.com/box-sizing.html
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 50%; // make page unscrollable
+  font-family: system-ui;
 }
 
 .clock-wrapper {
-    position: fixed;
-    top: 50%;
-    bottom: 50%;
-    right: 0;
-    left: 0;
-    width: 250px;
-    height: 250px;
-    margin: auto;
-    padding: 5px;
-    border-radius: 50%;
-    transform: scale(1.3);
+  position: fixed;
+  top: 50%;
+  bottom: 50%;
+  right: 0;
+  left: 0;
+  width: 260px;
+  height: 260px;
+  margin: auto;
+  padding: 5px;
+  border-radius: 50%;
+  transform: scale(1.4);
+  transform-origin: center; 
 }
 
 .clock-base {
-    width: 250px;
-    height: 250px;
-    background-color: #eee;
-    border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  background-color: #eee;
+  border-radius: 50%;
 }
 
 .click-indicator {
-    position: absolute;
-    z-index: 1;
-    top: 15px;
-    left: 15px;
-    width: 230px;
-    height: 230px;
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  left: 15px;
+  width: 230px;
+  height: 230px;
 }
 
 .click-indicator div {
-    position: absolute;
-    width: 2px;
-    height: 7px;
-    margin: 113px 114px;
-    background-color: #aaa;
+  position: absolute;
+  width: 2px;
+  height: 7px;
+  margin: 113px 114px;
+  background-color: #aaa;
 }
 
 @for $i from 1 through 12 {
-    .click-indicator div:nth-child(#{$i}) {
-        transform: rotate(30deg * $i) translateY(-110px);
-    }
+  .click-indicator div:nth-child(#{$i}) {
+    transform: rotate(30deg * $i) translateY(-110px);
+  }
 }
 
 .clock-hour {
-    position: absolute;
-    z-index: 2;
-    top: 80px;
-    left: 128px;
-    width: 4px;
-    height: 65px;
-    background-color: #555;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
-    transform-origin: 2px 50px;
-    transition: .5s;
-    animation: rotate-hour 43200s linear infinite;
+  position: absolute;
+  z-index: 2;
+  top: 80px;
+  left: 128px;
+  width: 4px;
+  height: 65px;
+  background-color: #555;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  transform-origin: 2px 50px;
+  transition: 0.5s;
+  animation: rotate-hour 43200s linear infinite;
 }
 
 .clock-minute {
-    position: absolute;
-    z-index: 3;
-    top: 60px;
-    left: 128px;
-    width: 4px;
-    height: 85px;
-    background-color: #555;
-    border-radius: 2px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
-    transform-origin: 2px 70px;
-    transition: .5s;
-    animation: rotate-minute 3600s linear infinite;
+  position: absolute;
+  z-index: 3;
+  top: 60px;
+  left: 128px;
+  width: 4px;
+  height: 85px;
+  background-color: #555;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  transform-origin: 2px 70px;
+  transition: 0.5s;
+  animation: rotate-minute 3600s linear infinite;
 }
 
 .clock-minute:after {
-    content: "";
-    display: block;
-    position: absolute;
-    left: -4px;
-    bottom: 9px;
-    width: 8px;
-    height: 8px;
-    background-color: #555;
-    border: solid 2px #555;
-    border-radius: 50%;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .2);
+  content: '';
+  display: block;
+  position: absolute;
+  left: -4px;
+  bottom: 9px;
+  width: 8px;
+  height: 8px;
+  background-color: #555;
+  border: solid 2px #555;
+  border-radius: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 }
 
 .clock-center {
-    position: absolute;
-    z-index: 1;
-    width: 150px;
-    height: 150px;
-    top: 55px;
-    left: 55px;
-    border-radius: 50%;
+  position: absolute;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  top: 55px;
+  left: 55px;
+  border-radius: 50%;
 }
 
 .clock-center:after {
-    content: "";
-    display: block;
-    width: 20px;
-    height: 20px;
-    margin: 65px;
-    background-color: #ddd;
-    border-radius: 50%;
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 65px;
+  background-color: #ddd;
+  border-radius: 50%;
 }
 
 .work-half {
-    position: absolute;
-    z-index: 1;
-    border: 5px solid rgb(255, 0, 0);
-    border-radius: 50%;
-    height: 250;
-    width: 250;
-    border-top-color: transparent;
-    border-left-color: transparent;
+  position: absolute;
+  z-index: 1;
+  border: 5px solid rgb(255, 0, 0);
+  border-radius: 50%;
+  height: 250;
+  width: 250;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
 
 .invisible-half {
-    position: absolute;
-    z-index: 4;
-    border: 5px solid #eee;
-    border-radius: 50%;
-    height: 250;
-    width: 250;
-    border-top-color: transparent;
-    border-left-color: transparent;
+  position: absolute;
+  z-index: 4;
+  border: 5px solid #eee;
+  border-radius: 50%;
+  height: 250;
+  width: 250;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
 
 .rest-half {
-    position: absolute;
-    z-index: 2;
-    border: 5px solid rgb(0, 255, 0);
-    border-radius: 50%;
-    height: 250;
-    width: 250;
-    border-top-color: transparent;
-    border-left-color: transparent;
+  position: absolute;
+  z-index: 2;
+  border: 5px solid rgb(0, 255, 0);
+  border-radius: 50%;
+  height: 250;
+  width: 250;
+  border-top-color: transparent;
+  border-left-color: transparent;
 }
 
 .done-half {
-    position: absolute;
-    z-index: 3;
-    border: 5px solid rgba(255, 238, 0, 0.664);
-    border-radius: 50%;
-    height: 250;
-    width: 250;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    transition: .5s;
-    animation: rotate-done-minute 3600s linear infinite;
+  position: absolute;
+  z-index: 3;
+  border: 5px solid rgba(255, 238, 0, 0.664);
+  border-radius: 50%;
+  height: 250;
+  width: 250;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transition: 0.5s;
+  animation: rotate-done-minute 3600s linear infinite;
 }
 
 // initially hided tomatoes
@@ -167,10 +170,9 @@ html, body {
 //     #tomato#{$i} {
 //         position: absolute;
 //         z-index: 6;
-//         margin: 113px 114px; 
+//         margin: 113px 114px;
 //         transform: rotate(30deg) translateY(-140px);
 //         width: 1.6rem;
 //         display: none;
 //     }
 // }
-

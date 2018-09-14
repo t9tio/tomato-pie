@@ -1,6 +1,5 @@
 <head>
     <meta charset="utf-8">
-    <title>Pie</title>
     <style id="clock-animations"></style>
     <!-- <link rel="stylesheet" type="text/css" href="./index.css"/> -->
 </head>
@@ -28,10 +27,21 @@
             <div class="clock-center"></div>
 
             <div class="work-half"></div>
-            <div class="invisible-half"></div>
             <div class="rest-half"></div>
             <div class="done-half"></div>
-            <div class="schedule-hour"></div>
+            <!-- Resolve on pixal problem: https://stackoverflow.com/a/5486042/4674834 -->
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
+            <div class="invisible-half"></div>
 
             <!-- <div id="tomato0"><img src="./assets/tomato.svg" width="20px"/></div>
             <div id="tomato1"><img src="./assets/tomato.svg" width="20px"/></div>
@@ -62,13 +72,14 @@
         </div>
     </div>
 
-    <div>
-        <h1>
+    <div id="todo-div">
+        <h1 id="todo-title">
             Todo List
         </h1>
         <ul id="list"></ul>
         <div id="input-div">
             <input id="input" placeholder="">
+            <input type="image" id="add-todo" src="./assets/addTODO.svg"/>
         </div>
     </div>
     <script src="./index.js"></script>

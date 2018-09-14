@@ -5,7 +5,7 @@ const dateFormat = require('dateformat');
  * @param date {Date} date obj
  */
 function getFormatedDateStr(date) {
-    return dateFormat(new Date(date), "yyyy-mm-dd");
+  return dateFormat(new Date(date), 'yyyy-mm-dd');
 }
 
 // Basic usage

@@ -7,8 +7,9 @@ chrome.browserAction.onClicked.addListener(() => {
 });
 
 // open new tab when click notification
-chrome.notifications.onClicked.addListener(() => {
+chrome.notifications.onClicked.addListener((notificationId) => {
     chrome.tabs.create({});
+    chrome.notifications.clear(notificationId);
 });
 
 chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
@@ -31,7 +32,7 @@ chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIn
         startTimmer();
     // abandon current tomato
     } else if (buttonIndex === 1) {
-        lastTomato.abandonReason = '';
+        lastTomato.isAbandoned = true;
         await store.Tomato.putByDate(today, tomatoes);
     }
 });
@@ -103,7 +104,7 @@ function startTimmer() {
 
     // when calling startTimmer multiple times, previous timeout should be cleard
     clearTimeout(currentTimeout);
-    clearTimeout(restTimeout)
+    clearTimeout(restTimeout);
     updateCurrent();
 }
 
