@@ -1,8 +1,9 @@
 import './styles/driver.scss';
 import './styles/index.scss';
 import './styles/todo.scss';
+import './styles/statics.scss';
 import './util/generateClockAnimations';
-// import './util/driver';
+import './util/driver';
 import minuteAnimation from './util/minuteAnimation';
 import store from './store';
 import showTodoListAndTomatoes from './util/showTodoListAndTomatoes';

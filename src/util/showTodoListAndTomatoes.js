@@ -137,8 +137,8 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
 
         await store.CurrentStartAt.put(startTime);
         await store.Tomato.putByDate(today, tomatoes);
-
-        await showTodoListAndTomatoes(todoList, tomatoes);
+        const todoes = await store.TodoList.getByDate(today);
+        await showTodoListAndTomatoes(todoes, tomatoes);
 
         chrome.browserAction.setBadgeText({ text: '25m' });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'red' });
@@ -167,7 +167,6 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
     // content-div editable updating todo content
     const contentDiv = document.querySelector(`#todo-${todo.createdAt} .content-div`);
     contentDiv.addEventListener('input', async (e) => {
-      console.log(e);
       // hit enter
       if (e.inputType === 'insertParagraph' || (e.inputType === 'insertText' && e.data === null)) {
         const today = new Date();

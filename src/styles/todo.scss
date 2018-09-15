@@ -4,141 +4,123 @@
   // transform: scale(1.1, 1.1);
   // transform-origin: left;
   // TODO: find another way if you want it bigger
-}
-
-#todo-title {
-  margin-left: 6px;
-  margin-bottom: 2px;
-  padding-bottom: 6px;
-  border-bottom: solid 1px #ddd;
-  width: 295px;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
-
-li {
-  // text-align: left;
-  position: relative;
-  font-size: 15px;
-  list-style: none;
-  width: 450px;
-  margin: 0;
-  border: 0;
-}
-
-li:hover {
-  background-color: rgba(0, 0, 0, 0);
-  cursor: move;
-}
-
-li.chosen {
-  background-color: white;
-}
-
-li.ghost {
-  // background-color: white;
-  opacity: 0;
-}
-// li: {
-//     background: white;
-// }
-
-.checkbox {
-  font-size: 25px;
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 12px;
-  // border-radius: 50%;
-  &:hover {
-    cursor: pointer;
+  #todo-title {
+    margin-left: 6px;
+    margin-bottom: 2px;
+    padding-bottom: 6px;
+    border-bottom: solid 1px #ddd;
+    width: 295px;
   }
-}
-
-.content-div {
-  display: inline-block;
-  vertical-align: top;
-  width: 270px;
-  height: auto;
-  // word-wrap: break-word;
-  // word-break: break-all;
-  // overflow: hidden;
-  text-align: left;
-  // padding-left: 1px;
-  outline: 0;
-  border-bottom: solid 1px #ddd;
-  // border-top: solid 1px #ddd;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.content-div:hover {
-  cursor: text;
-}
-
-.content-div.done {
-  // text-decoration: line-through;
-  color: #999;
-}
-
-.todo-tomato {
-  display: inline-block;
-  padding-top: 12px;
-  width: 15px;
-}
-
-.add-tomato-btn {
-  // padding-top: 6px;
-  // outline: 0;
-  display: none;
-  width: 20px;
-  position: absolute;
-  right: 150px;
-  top: 8px;
-  opacity: 0.8;
-}
-
-.add-tomato-btn:hover {
-  cursor: pointer;
-}
-//   li:hover {
-//     text-decoration: line-through;
-//   }
-
-#input-div {
-  width: 270px;
-  margin-top: 10px;
-  margin-left: 32px;
-  border-bottom: solid 1px #ddd;
-  position: relative;
-  #input {
-    display: inline-block;
-    font-size: 15px;
+  ul {
+    padding: 0;
+    margin: 0;
     border: 0;
+    li {
+      // text-align: left;
+      position: relative;
+      font-size: 15px;
+      list-style: none;
+      width: 450px;
+      margin: 0;
+      border: 0;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0);
+        cursor: move;
+      }
+      &.chosen {
+        background-color: white;
+      }
+      &.ghost {
+        // background-color: white;
+        opacity: 0;
+      }
+      .checkbox {
+        font-size: 25px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 12px;
+        // border-radius: 50%;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .content-div {
+        display: inline-block;
+        vertical-align: top;
+        width: 270px;
+        height: auto;
+        // word-wrap: break-word;
+        // word-break: break-all;
+        // overflow: hidden;
+        text-align: left;
+        // padding-left: 1px;
+        outline: 0;
+        border-bottom: solid 1px #ddd;
+        // border-top: solid 1px #ddd;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        &:hover {
+          cursor: text;
+        }
+        &.done {
+          // text-decoration: line-through;
+          color: #999;
+        }
+      }
+
+      .todo-tomato {
+        display: inline-block;
+        padding-top: 12px;
+        width: 15px;
+      }
+
+      .add-tomato-btn {
+        // padding-top: 6px;
+        // outline: 0;
+        display: none;
+        width: 20px;
+        position: absolute;
+        right: 150px;
+        top: 8px;
+        opacity: 0.8;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .abandoned-tomato {
+        z-index: -1;
+      }
+    }
+  }
+
+  #input-div {
     width: 270px;
-    padding-bottom: 10px;
-    padding-top: 0;
-    background: transparent;
+    margin-top: 10px;
+    margin-left: 32px;
+    border-bottom: solid 1px #ddd;
+    position: relative;
+    #input {
+      display: inline-block;
+      font-size: 15px;
+      border: 0;
+      width: 270px;
+      padding-bottom: 10px;
+      padding-top: 0;
+      background: transparent;
+      &:focus {
+        outline: none;
+      }
+    }
+    #add-todo {
+      // padding-top: 6px;
+      // outline: 0;
+      display: none;
+      width: 15px;
+      position: absolute;
+      right: 2px;
+      top: 2px;
+      opacity: 0.8;
+    }
   }
-  #input:focus {
-    outline: none;
-  }
-}
-
-#add-todo {
-  // padding-top: 6px;
-  // outline: 0;
-  display: none;
-  width: 15px;
-  position: absolute;
-  right: 2px;
-  top: 2px;
-  opacity: 0.8;
-}
-
-.abandoned-tomato {
-  z-index: -1;
 }

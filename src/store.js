@@ -4,6 +4,10 @@ import getFormatedDateStr from './util/getFormatedDateStr';
 /**
  * store data structure
  * {
+ *     CurrentStartAt: 132413241234,
+ *
+ *     IsOldUser: true,
+ *
  *     "tomatoes-2018-08-07": [{
  *         startAt: 1533653542468, // also used as id
  *         isAbandoned: false, // abandoned if not undefined
@@ -17,9 +21,21 @@ import getFormatedDateStr from './util/getFormatedDateStr';
  *         isDone: fasle,
  *     }],
  *
- *     "emergencyList?"
  * }
  */
+
+const IsOldUser = {
+  get: async () => {
+    const storage = await chrome.storage.promise.sync.get('isOldUser');
+    if (storage) {
+      return storage.isOldUser;
+    }
+    return false;
+  },
+  put: async (isOldUser) => {
+    await chrome.storage.promise.sync.set({ isOldUser });
+  },
+};
 
 const CurrentStartAt = {
   get: async () => {
@@ -95,7 +111,14 @@ const TodoList = {
 
 // TODO: about tags
 export default {
+  IsOldUser,
   CurrentStartAt,
   Tomato,
   TodoList,
 };
+
+// Init store, For like debuging driver
+// IsOldUser.put(false);
+// Tomato.putByDate(new Date(), []);
+// TodoList.putByDate(new Date(), []);
+// CurrentStartAt.put(null);

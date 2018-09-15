@@ -1,0 +1,9 @@
+.show-statics-div {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 30px;
+  &:hover {
+    cursor: pointer;
+  }
+}
