@@ -88,6 +88,19 @@
         }
       }
 
+      .rm-tomato-btn {
+        // padding-top: 6px;
+        // outline: 0;
+        display: none;
+        width: 20px;
+        position: absolute;
+        right: 172px;
+        top: 8px;
+        opacity: 0.8;
+        &:hover {
+          cursor: pointer;
+        }
+      }
       .abandoned-tomato {
         z-index: -1;
       }

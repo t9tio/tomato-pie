@@ -56,6 +56,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
                 </div>
                 ${todoTomatoHTMLs.join('')}
                 <input type="image" class="add-tomato-btn" src="./assets/add.svg"/>
+                <input type="image" class="rm-tomato-btn" src="./assets/rmTODO.svg"/>
             </li>
         `;
   });
@@ -82,10 +83,12 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
   todoList.forEach((todo) => {
     const li = document.querySelector(`#todo-${todo.createdAt}`);
 
-    // hover on li show add-tomato btn
+    // hover on li show add-tomato-btn and rm-tomato-btn
     const addTomatoBtn = document.querySelector(`#todo-${todo.createdAt} .add-tomato-btn`);
+    const rmTomatoBtn = document.querySelector(`#todo-${todo.createdAt} .rm-tomato-btn`);
     li.addEventListener('mouseover', () => {
-      if (!todo.isDone) addTomatoBtn.style.display = 'inline-block';
+      rmTomatoBtn.style.display = 'inline-block';
+      addTomatoBtn.style.display = 'inline-block';
       const liTomatoEls = document.querySelectorAll(`#todo-${todo.createdAt} .todo-tomato`);
       liTomatoEls.forEach(tomatoEl => tomatoEl.style.opacity = '.35');
       tomatoes
@@ -97,6 +100,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
     });
     li.addEventListener('mouseleave', () => {
       addTomatoBtn.style.display = 'none';
+      rmTomatoBtn.style.display = 'none';
       const liTomatoEls = document.querySelectorAll(`#todo-${todo.createdAt} .todo-tomato`);
       liTomatoEls.forEach(tomato => tomato.style.opacity = '1');
       tomatoes
@@ -145,6 +149,16 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
         minuteAnimation.show(startTime);
         backgroundPage.startTimmer();
       }
+    });
+
+    // rm todo and coresponding tomato
+    rmTomatoBtn.addEventListener('click', async () => {
+      const today = new Date();
+      // const todoList = await store.TodoList.getByDate(today);
+      const newTodoList = todoList.filter(todoInList => todoInList.createdAt !== todo.createdAt);
+      const newTodoes = await store.TodoList.putByDate(today, newTodoList);
+      const tomatoes = await store.Tomato.getByDate(today);
+      await showTodoListAndTomatoes(newTodoes, tomatoes);
     });
 
     // event listener for checkbox
