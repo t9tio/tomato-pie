@@ -18,7 +18,9 @@ import getFormatedDateStr from './util/getFormatedDateStr';
  *     "todoList-2018-08-07": [{
  *         createdAt: 1533653542468 // also used as id
  *         content: "master css position",
- *         isDone: fasle,
+ *         isDone: fasle, // default undefined
+ *         isIgnoredFromRecentList: false,
+ *         isCopyed: false,
  *     }],
  *
  * }
@@ -78,8 +80,8 @@ const Tomato = {
   },
 };
 
-const TodoList = {
-  getByDate: async (date) => {
+class TodoList {
+  async getByDate(date) {
     const dateStr = getFormatedDateStr(date);
     const todoListKey = `todoList-${dateStr}`;
     let todoList = (await chrome.storage.promise.sync.get(todoListKey))[todoListKey];
@@ -93,28 +95,74 @@ const TodoList = {
     }
 
     return todoList;
-  },
+  }
 
   /**
      * @param date {Object} date obj
      * @param todoList {Array} [{id: '', content: ''}]
      */
-  putByDate: async (date, todoList) => {
+  async putByDate(date, todoList) {
     const dateStr = getFormatedDateStr(date);
     const todoListKey = `todoList-${dateStr}`;
     const obj = {};
     obj[todoListKey] = todoList;
     await chrome.storage.promise.sync.set(obj);
     return todoList;
-  },
-};
+  }
+
+  /**
+   * return last N day's todoLists
+   * @param lastN {Number} number of days privious
+   * @return {Array} last N days' todoList
+   * @example
+   * [
+   *    {
+   *     "todoList-2018-08-07": [{
+   *         createdAt: 1533653542468 // also used as id
+   *         content: "master css position",
+   *         isDone: fasle,
+   *     }],
+   *    }
+   * ]
+   */
+  async getByDateRange(today, lastN) {
+    const dateArr = [];
+    for (let i = 1; i <= lastN; i += 1) {
+      // ref: https://stackoverflow.com/a/1296374/4674834
+      const newDate = new Date(new Date().setDate(today.getDate() - i));
+      dateArr.push(newDate);
+    }
+
+    const dateStrArr = dateArr.map(date => getFormatedDateStr(date));
+
+    const todoLists = await Promise.all(dateStrArr.map(dateStr => chrome.storage.promise.sync.get(`todoList-${dateStr}`)));
+
+    return todoLists;
+  }
+
+  /**
+   * for updating one todo
+   */
+  async putTODO(createdAt, newTODO) {
+    const todoDate = new Date(createdAt);
+    const todoList = await this.getByDate(todoDate);
+    const newTodoList = todoList.map((todo) => {
+      if (todo.createdAt === createdAt) {
+        return newTODO;
+      }
+      return todo;
+    });
+    await this.putByDate(todoDate, newTodoList);
+    return newTodoList;
+  }
+}
 
 // TODO: about tags
 export default {
   IsOldUser,
   CurrentStartAt,
   Tomato,
-  TodoList,
+  TodoList: new TodoList(),
 };
 
 // Init store, For like debuging driver

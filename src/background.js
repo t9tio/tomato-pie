@@ -1,15 +1,17 @@
 import store from './store';
-
+const oneMinute = 60 * 1000;
 // open new tab when click ico
 // ref: https://stackoverflow.com/questions/3188384/google-chrome-extensions-open-new-tab-when-clicking-a-toolbar-icon
 chrome.browserAction.onClicked.addListener(() => {
-    chrome.tabs.create({});
+  window.focus();
+  chrome.tabs.create({});
 });
 
 // open new tab when click notification
 chrome.notifications.onClicked.addListener((notificationId) => {
-    chrome.tabs.create({});
-    chrome.notifications.clear(notificationId);
+  window.focus();
+  chrome.tabs.create({});
+  chrome.notifications.clear(notificationId);
 });
 
 chrome.notifications.onButtonClicked.addListener(async (notificationId, buttonIndex) => {
@@ -65,7 +67,7 @@ async function updateCurrent () {
         chrome.browserAction.setBadgeText({ text: current.toString() + "m" });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'red'});
         current = current - 1;
-        currentTimeout = setTimeout(async () => await updateCurrent(), 1000 * 60);
+        currentTimeout = setTimeout(async () => await updateCurrent(), oneMinute);
     }
 }
 
@@ -94,7 +96,7 @@ async function updateRest () {
         chrome.browserAction.setBadgeText({ text: rest.toString() + "m" });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'green'});
         rest = rest - 1;
-        restTimeout = setTimeout(async () => await updateRest(), 1000 * 60);
+        restTimeout = setTimeout(async () => await updateRest(), oneMinute);
     }
 }
 

@@ -13,7 +13,9 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
   const tomatoContainer = document.getElementById('tomato-container');
   const tomatoHTMLs = tomatoes
     .map((tomato, i) => {
-      if (tomato.startAt === currentStartAt) {
+      const now = new Date();
+      if (tomato.startAt === currentStartAt
+        && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
         return `<img id="tomato-${tomato.startAt}" src="./assets/onGoingTomato.svg" width="22px"/>`;
       } if (tomato.isAbandoned) {
         // return '';
@@ -40,7 +42,9 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
     const todoTomatoHTMLs = tomatoes
       .filter(tomato => tomato.todoId === todo.createdAt)
       .map((tomato) => {
-        if (tomato.startAt === currentStartAt) {
+        const now = new Date();
+        if (tomato.startAt === currentStartAt
+          && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
           return '<img class="todo-tomato" src="./assets/onGoingTomato.svg"/>';
         } if (tomato.isAbandoned) {
           return '<img class="todo-tomato" src="./assets/abandonedTomato.svg"/>';

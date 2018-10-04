@@ -6,12 +6,68 @@
   // TODO: find another way if you want it bigger
   #todo-title {
     margin-left: 6px;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     padding-bottom: 6px;
     border-bottom: solid 1px #ddd;
     width: 295px;
   }
-  ul {
+  #unfinshed-list {
+    background-color: rgb(245, 245, 245);
+    color: #555;
+    margin-left: 6px;
+    width: 295px;
+    padding: 5px;
+    border-bottom: solid 1px #ddd;
+    &.hide {
+      display: none;
+    }
+    ul {
+      padding-left: 35px;
+      margin-top: 0;
+      margin-left: 0;
+      margin-bottom: 0;
+      li {
+        word-break: break-all;
+        position: relative;
+        &:hover {
+          background-color: #eee;
+        }
+        .copy-todo-btn {
+          // padding-top: 6px;
+          // outline: 0;
+          display: none;
+          width: 1rem;
+          position: absolute;
+          right: 0;
+          opacity: 0.8;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .ignore-todo-btn {
+          display: none;
+          width: 1rem;
+          position: absolute;
+          right: 1rem;
+          opacity: 0.8;
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+  #toggle-unfinished {
+    width: .9rem;
+    display: inline;
+    &:hover {
+      cursor: pointer;
+    }
+    &.reverse {
+      transform: scaleY(-1);
+    }
+  }
+  #list {
     padding: 0;
     margin: 0;
     border: 0;
@@ -24,7 +80,7 @@
       margin: 0;
       border: 0;
       &:hover {
-        background-color: rgba(0, 0, 0, 0);
+        background-color: #eee;
         cursor: move;
       }
       &.chosen {

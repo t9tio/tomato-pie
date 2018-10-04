@@ -6,7 +6,6 @@
   "scripts": {
     "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel watch src/index.html --public-url '.' --no-cache",
     "startBackground": "parcel watch src/background.js --no-cache",
-    "build": "rm -r dist && parcel build src/index.html --public-url '.' && parcel build src/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && npm run packDisk",
     "packDisk": "crx pack dist -o extension.crx",
     "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'"
   },
