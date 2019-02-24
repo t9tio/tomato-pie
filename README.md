@@ -9,7 +9,7 @@ A new UI for Pomodoro Technique
 
 ## Install
 
-From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi) or [manually]()
+From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi) or [manually](https://github.com/t9tio/tomato-pie/releases)
 
 ## Usage
 
