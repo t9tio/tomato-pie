@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img height="250" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
+  <img height="200" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
 </p>
 
 # Tomato Pie
