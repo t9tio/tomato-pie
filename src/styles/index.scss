@@ -1,5 +1,16 @@
-// 元素的内边距和边框不再会增加它的宽度, do math on padding/border/margin is not interesting
-// http://zh.learnlayout.com/box-sizing.html
+// adjust time speed
+$rotate-minute: 3600s;
+$clock-size: scale(1.4);
+$red: #ff3737;
+$orange: #f5fc97c9;
+$green: #9de16f;
+$clock-base-color: #eee;
+$clock-hand-color: #555;
+$clock-hand-shadow-color: #555;
+$clock-center-color: #ddd;
+$click-indicator-color: #aaa;
+
+// do math on padding/border/margin is not interesting: http://zh.learnlayout.com/box-sizing.html
 * {
   box-sizing: border-box;
 }
@@ -10,9 +21,13 @@ body {
   font-family: system-ui;
 }
 
+.invisible {
+  display: none;
+}
+
 .clock-wrapper {
   position: fixed;
-  top: 50%;
+  top: 35%;
   bottom: 50%;
   right: 0;
   left: 0;
@@ -21,13 +36,15 @@ body {
   margin: auto;
   padding: 5px;
   border-radius: 50%;
-  transform: scale(1.4);
+  transform: $clock-size;
   transform-origin: center;
+
   .clock-base {
     width: 250px;
     height: 250px;
-    background-color: #eee;
+    background-color: $clock-base-color;
     border-radius: 50%;
+
     .click-indicator {
       position: absolute;
       z-index: 1;
@@ -35,19 +52,22 @@ body {
       left: 15px;
       width: 230px;
       height: 230px;
+
       div {
         position: absolute;
         width: 2px;
         height: 7px;
         margin: 113px 114px;
-        background-color: #aaa;
+        background-color: $click-indicator-color;
       }
+
       @for $i from 1 through 12 {
         div:nth-child(#{$i}) {
           transform: rotate(30deg * $i) translateY(-110px);
         }
       }
     }
+
     .clock-hour {
       position: absolute;
       z-index: 2;
@@ -55,9 +75,9 @@ body {
       left: 128px;
       width: 4px;
       height: 65px;
-      background-color: #555;
+      background-color: $clock-hand-color;
       border-radius: 2px;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 2px $clock-hand-shadow-color;
       transform-origin: 2px 50px;
       transition: 0.5s;
       animation: rotate-hour 43200s linear infinite;
@@ -70,12 +90,12 @@ body {
       left: 128px;
       width: 4px;
       height: 85px;
-      background-color: #555;
+      background-color: $clock-hand-color;
       border-radius: 2px;
-      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 2px $clock-hand-shadow-color;
       transform-origin: 2px 70px;
       transition: 0.5s;
-      animation: rotate-minute 3600s linear infinite;
+      animation: rotate-minute $rotate-minute linear infinite;
     }
 
     .clock-minute:after {
@@ -86,10 +106,10 @@ body {
       bottom: 9px;
       width: 8px;
       height: 8px;
-      background-color: #555;
-      border: solid 2px #555;
+      background-color: $clock-hand-color;
+      border: solid 2px $clock-hand-color;
       border-radius: 50%;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 3px $clock-hand-shadow-color;
     }
 
     .clock-center {
@@ -103,19 +123,19 @@ body {
     }
 
     .clock-center:after {
-      content: '';
+      content: "";
       display: block;
       width: 20px;
       height: 20px;
       margin: 65px;
-      background-color: #ddd;
+      background-color: $clock-center-color;
       border-radius: 50%;
     }
 
     .work-half {
       position: absolute;
       z-index: 1;
-      border: 5px solid rgb(255, 0, 0);
+      border: 7px solid $red;
       border-radius: 50%;
       height: 250;
       width: 250;
@@ -126,7 +146,7 @@ body {
     .invisible-half {
       position: absolute;
       z-index: 4;
-      border: 5px solid #eee;
+      border: 7px solid $clock-base-color;
       border-radius: 50%;
       height: 250;
       width: 250;
@@ -137,7 +157,7 @@ body {
     .rest-half {
       position: absolute;
       z-index: 2;
-      border: 5px solid rgb(0, 255, 0);
+      border: 7px solid $green;
       border-radius: 50%;
       height: 250;
       width: 250;
@@ -148,26 +168,14 @@ body {
     .done-half {
       position: absolute;
       z-index: 3;
-      border: 5px solid rgba(255, 238, 0, 0.664);
+      border: 7px solid $orange;
       border-radius: 50%;
       height: 250;
       width: 250;
       border-top-color: transparent;
       border-left-color: transparent;
       transition: 0.5s;
-      animation: rotate-done-minute 3600s linear infinite;
+      animation: rotate-done-minute $rotate-minute linear infinite;
     }
   }
 }
-
-// initially hided tomatoes
-// @for $i from 0 through 23 {
-//     #tomato#{$i} {
-//         position: absolute;
-//         z-index: 6;
-//         margin: 113px 114px;
-//         transform: rotate(30deg) translateY(-140px);
-//         width: 1.6rem;
-//         display: none;
-//     }
-// }

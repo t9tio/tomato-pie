@@ -1,172 +1,142 @@
-import 'chrome-storage-promise';
-import getFormatedDateStr from './util/getFormatedDateStr';
-
 /**
  * store data structure
- * {
- *     CurrentStartAt: 132413241234,
  *
- *     IsOldUser: true,
+ * currentStartAt: 132413241234,
  *
- *     "tomatoes-2018-08-07": [{
- *         startAt: 1533653542468, // also used as id
- *         isAbandoned: false, // abandoned if not undefined
- *         todoId: "abc",
- *     }],
+ * tomatoList: [{
+ *   startAt: 1533653542468, // also used as id
+ *   todoId: 1533653542468,
+ * }],
  *
+ * todoList: [{
+ *   createdAt: 1533653542468, // also used as id
+ *   content: "master css position",
+ * }]
  *
- *     "todoList-2018-08-07": [{
- *         createdAt: 1533653542468 // also used as id
- *         content: "master css position",
- *         isDone: fasle, // default undefined
- *         isIgnoredFromRecentList: false,
- *         isCopyed: false,
- *     }],
- *
- * }
+ * doneList: [{
+ *   createdAt: 1533653542468, // also used as id
+ *   doneAt: 1533653542468,
+ *   content: "master css position",
+ * }]
  */
 
-const IsOldUser = {
-  get: async () => {
-    const storage = await chrome.storage.promise.sync.get('isOldUser');
-    if (storage) {
-      return storage.isOldUser;
+const ShowInfo = {
+  get: () => localStorage.getItem('isShowInfo'),
+  set: (boolean) => {
+    if (boolean) {
+      localStorage.setItem('isShowInfo', true);
+    } else {
+      localStorage.removeItem('isShowInfo');
     }
-    return false;
-  },
-  put: async (isOldUser) => {
-    await chrome.storage.promise.sync.set({ isOldUser });
   },
 };
 
 const CurrentStartAt = {
-  get: async () => {
-    const storage = await chrome.storage.promise.sync.get('currentStartAt');
-    if (storage) {
-      return storage.currentStartAt;
-    }
-    return null;
-  },
-
-  put: async (currentStartAt) => {
-    await chrome.storage.promise.sync.set({ currentStartAt });
-  },
+  get: () => Number(localStorage.getItem('currentStartAt')),
+  put: currentStartAt => localStorage.setItem('currentStartAt', currentStartAt),
+  remove: () => localStorage.removeItem('currentStartAt'),
 };
 
 const Tomato = {
-  getByDate: async (date) => {
-    const dateStr = getFormatedDateStr(date);
-    const tomatoesKey = `tomatoes-${dateStr}`;
-    let tomatoes = (await chrome.storage.promise.sync.get(tomatoesKey))[tomatoesKey];
-
-    // init tomatoes if no tomato fond
-    if (!tomatoes) {
-      tomatoes = [];
-      const obj = {};
-      obj[tomatoesKey] = tomatoes;
-      await chrome.storage.promise.sync.set(obj);
-    }
-
-    return tomatoes;
+  getAll: () => {
+    const all = JSON.parse(localStorage.getItem('tomatoList'));
+    if (!all) return [];
+    return all;
   },
-
-  putByDate: async (date, tomatoes) => {
-    const dateStr = getFormatedDateStr(date);
-    const tomatoesKey = `tomatoes-${dateStr}`;
-    const obj = {};
-    obj[tomatoesKey] = tomatoes;
-    await chrome.storage.promise.sync.set(obj);
-    return tomatoes;
+  // get tomatoes of last 12 hours
+  get12h: () => {
+    const all = JSON.parse(localStorage.getItem('tomatoList'));
+    if (!all) return [];
+    return all.filter(tomato => tomato.startAt > new Date().getTime() - 1000 * 60 * 60 * 12);
+  },
+  push: (tomato) => {
+    const cur = JSON.parse(localStorage.getItem('tomatoList'));
+    let next;
+    if (!cur) {
+      next = [tomato];
+    } else {
+      next = cur.concat(tomato);
+    }
+    localStorage.setItem('tomatoList', JSON.stringify(next));
+    return next;
+  },
+  pop: () => {
+    const cur = JSON.parse(localStorage.getItem('tomatoList'));
+    const next = cur.slice(0, -1);
+    localStorage.setItem('tomatoList', JSON.stringify(next));
+    return next;
   },
 };
 
-class TodoList {
-  async getByDate(date) {
-    const dateStr = getFormatedDateStr(date);
-    const todoListKey = `todoList-${dateStr}`;
-    let todoList = (await chrome.storage.promise.sync.get(todoListKey))[todoListKey];
-
-    // init todoList if no todo fond
-    if (!todoList) {
-      todoList = [];
-      const obj = {};
-      obj[todoListKey] = todoList;
-      await chrome.storage.promise.sync.set(obj);
+const Todo = {
+  getAll: () => {
+    const all = JSON.parse(localStorage.getItem('todoList'));
+    if (!all) return [];
+    return all;
+  },
+  remove: (createdAt) => {
+    const cur = JSON.parse(localStorage.getItem('todoList'));
+    const next = cur.filter(todo => todo.createdAt !== createdAt);
+    localStorage.setItem('todoList', JSON.stringify(next));
+    return next;
+  },
+  push: (todo) => {
+    const cur = JSON.parse(localStorage.getItem('todoList'));
+    let next;
+    if (!cur) {
+      next = [todo];
+    } else {
+      next = cur.concat(todo);
     }
-
-    return todoList;
-  }
-
-  /**
-     * @param date {Object} date obj
-     * @param todoList {Array} [{id: '', content: ''}]
-     */
-  async putByDate(date, todoList) {
-    const dateStr = getFormatedDateStr(date);
-    const todoListKey = `todoList-${dateStr}`;
-    const obj = {};
-    obj[todoListKey] = todoList;
-    await chrome.storage.promise.sync.set(obj);
-    return todoList;
-  }
-
-  /**
-   * return last N day's todoLists
-   * @param lastN {Number} number of days privious
-   * @return {Array} last N days' todoList
-   * @example
-   * [
-   *    {
-   *     "todoList-2018-08-07": [{
-   *         createdAt: 1533653542468 // also used as id
-   *         content: "master css position",
-   *         isDone: fasle,
-   *     }],
-   *    }
-   * ]
-   */
-  async getByDateRange(today, lastN) {
-    const dateArr = [];
-    for (let i = 1; i <= lastN; i += 1) {
-      // ref: https://stackoverflow.com/a/1296374/4674834
-      const newDate = new Date(new Date().setDate(today.getDate() - i));
-      dateArr.push(newDate);
-    }
-
-    const dateStrArr = dateArr.map(date => getFormatedDateStr(date));
-
-    const todoLists = await Promise.all(dateStrArr.map(dateStr => chrome.storage.promise.sync.get(`todoList-${dateStr}`)));
-
-    return todoLists;
-  }
-
-  /**
-   * for updating one todo
-   */
-  async putTODO(createdAt, newTODO) {
-    const todoDate = new Date(createdAt);
-    const todoList = await this.getByDate(todoDate);
-    const newTodoList = todoList.map((todo) => {
-      if (todo.createdAt === createdAt) {
-        return newTODO;
-      }
-      return todo;
+    localStorage.setItem('todoList', JSON.stringify(next));
+    return next;
+  },
+  update: (createdAt, content) => {
+    const cur = JSON.parse(localStorage.getItem('todoList'));
+    const next = cur.map((todo) => {
+      const newTodo = todo;
+      if (newTodo.createdAt === createdAt) newTodo.content = content;
+      return newTodo;
     });
-    await this.putByDate(todoDate, newTodoList);
-    return newTodoList;
-  }
-}
+    localStorage.setItem('todoList', JSON.stringify(next));
+    return next;
+  },
+  move: (oldIndex, newIndex) => {
+    const cur = JSON.parse(localStorage.getItem('todoList'));
+    const [oldTodo] = cur.splice(oldIndex, 1);
+    cur.splice(newIndex, 0, oldTodo);
+    const next = cur;
+    localStorage.setItem('todoList', JSON.stringify(next));
+    return next;
+  },
+};
 
-// TODO: about tags
+const Done = {
+  getAll: () => JSON.parse(localStorage.getItem('doneList')),
+  remove: (createdAt) => {
+    const cur = JSON.parse(localStorage.getItem('doneList'));
+    const next = cur.filter(todo => todo.createdAt !== createdAt);
+    localStorage.setItem('doneList', JSON.stringify(next));
+    return next;
+  },
+  push: (todo) => {
+    const cur = JSON.parse(localStorage.getItem('doneList'));
+    let next;
+    if (!cur) {
+      next = [todo];
+    } else {
+      next = cur.concat(todo);
+    }
+    localStorage.setItem('doneList', JSON.stringify(next));
+    return next;
+  },
+};
+
+// TODO: todo tags??
 export default {
-  IsOldUser,
+  ShowInfo,
   CurrentStartAt,
   Tomato,
-  TodoList: new TodoList(),
+  Todo,
+  Done,
 };
-
-// Init store, For like debuging driver
-// IsOldUser.put(false);
-// Tomato.putByDate(new Date(), []);
-// TodoList.putByDate(new Date(), []);
-// CurrentStartAt.put(null);

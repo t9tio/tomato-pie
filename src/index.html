@@ -1,96 +1,98 @@
 <head>
-    <meta charset="utf-8">
-    <title>Tomato Pie</title>
-    <style id="clock-animations"></style>
-    <!-- <link rel="icon" href="https://assets-cdn.github.com/favicon.ico">
+  <meta charset="utf-8" />
+  <title>Tomato Pie</title>
+  <style id="clock-animations"></style>
+  <!-- <link rel="icon" href="https://assets-cdn.github.com/favicon.ico">
     <link rel="apple-touch-icon" href="https://assets-cdn.github.com/favicon.ico">
     <link rel="bookmark" href="https://assets-cdn.github.com/favicon.ico"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="./index.css"/> -->
+  <!-- <link rel="stylesheet" type="text/css" href="./index.css"/> -->
 </head>
 
 <body>
-    <!-- <button id="start-tomato">Start a tomato 🍅</button> -->
-    <div class="clock-wrapper">
-        <div class="clock-base">
-            <div class="click-indicator">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="clock-hour"></div>
-            <div class="clock-minute"></div>
-            <div class="clock-center"></div>
+  <!-- <button id="start-tomato">Start a tomato 🍅</button> -->
+  <div class="clock-wrapper">
+    <div class="clock-base">
+      <div class="click-indicator">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="clock-hour"></div>
+      <div class="clock-minute"></div>
+      <div class="clock-center"></div>
 
-            <div class="work-half"></div>
-            <div class="rest-half"></div>
-            <div class="done-half"></div>
-            <!-- Resolve on pixal problem: https://stackoverflow.com/a/5486042/4674834 -->
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
-            <div class="invisible-half"></div>
+      <div class="work-half"></div>
+      <div class="rest-half"></div>
+      <div class="done-half"></div>
+      <!-- Resolve on pixal problem: https://stackoverflow.com/a/5486042/4674834 -->
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
+      <div class="invisible-half"></div>
 
-            <!-- <div id="tomato0"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato1"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato2"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato3"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato4"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato5"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato6"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato7"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato8"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato9"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato10"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato11"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato12"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato13"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato14"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato15"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato16"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato17"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato18"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato19"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato20"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato21"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato22"><img src="./assets/tomato.svg" width="20px"/></div>
-            <div id="tomato23"><img src="./assets/tomato.svg" width="20px"/></div> -->
-
-            <div id="tomato-container"></div>
-        </div>
+      <div id="tomato-container"></div>
     </div>
+  </div>
 
-    <div id="todo-div">
-        <h1 id="todo-title">
-            Todo List <img id="toggle-unfinished" src="./assets/dropdownIco.svg"/>
-        </h1>
-        <div id="unfinshed-list" class="hide">
-            &nbsp;> Unfinished todoes of last 7 days:
-            <ul></ul>
-        </div>
-        <ul id="list"></ul>
-        <div id="input-div">
-            <input id="input" placeholder="">
-            <input type="image" id="add-todo" src="./assets/addTODO.svg"/>
-        </div>
+  <div id="todo-div">
+    <h1 id="todo-title">
+      <!-- Todo List <img id="toggle-unfinished" src="./assets/staticsIco.svg"/> -->
+      Todo List
+    </h1>
+    <ul id="list"></ul>
+    <div id="input-div">
+      <input id="input" placeholder="" />
+      <input type="image" id="add-todo" src="./assets/addTODO.svg" />
     </div>
+  </div>
 
-    <img class="show-statics-div" src="./assets/staticsIco.svg" placeholder="statics" size="50px"/>
-    <script src="./index.js"></script>
+  <div class="calendar invisible"></div>
+  <div id="tooltip">Hello world</div>
+
+  <div class="info-div  invisible">
+    <ul>
+      <li>
+        <a href="https://github.com/t9tio/tomato-pie/issues">Feedback</a>
+      </li>
+
+      <li>
+        <a href="https://github.com/t9tio/tomato-pie/">Source code</a>
+      </li>
+      <li>Provided by <a href="http://t9t.io">t9t.io</a></li>
+      <li>Follow us on <a href="https://twitter.com/t9tio">twitter</a></li>
+    </ul>
+  </div>
+  <img
+    class="show-statics"
+    src="./assets/staticsIco.svg"
+    placeholder="statics"
+  />
+  <img class="show-info" src="./assets/information.svg" placeholder="info" />
+  <script src="./index.js"></script>
 </body>

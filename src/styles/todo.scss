@@ -1,6 +1,8 @@
+$distance-to-edge: 15px;
+
 #todo-div {
   width: 450px;
-  margin: 20px;
+  margin: $distance-to-edge;
   // transform: scale(1.1, 1.1);
   // transform-origin: left;
   // TODO: find another way if you want it bigger
@@ -11,62 +13,7 @@
     border-bottom: solid 1px #ddd;
     width: 295px;
   }
-  #unfinshed-list {
-    background-color: rgb(245, 245, 245);
-    color: #555;
-    margin-left: 6px;
-    width: 295px;
-    padding: 5px;
-    border-bottom: solid 1px #ddd;
-    &.hide {
-      display: none;
-    }
-    ul {
-      padding-left: 35px;
-      margin-top: 0;
-      margin-left: 0;
-      margin-bottom: 0;
-      li {
-        word-break: break-all;
-        position: relative;
-        &:hover {
-          background-color: #eee;
-        }
-        .copy-todo-btn {
-          // padding-top: 6px;
-          // outline: 0;
-          display: none;
-          width: 1rem;
-          position: absolute;
-          right: 0;
-          opacity: 0.8;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-        .ignore-todo-btn {
-          display: none;
-          width: 1rem;
-          position: absolute;
-          right: 1rem;
-          opacity: 0.8;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
-  #toggle-unfinished {
-    width: .9rem;
-    display: inline;
-    &:hover {
-      cursor: pointer;
-    }
-    &.reverse {
-      transform: scaleY(-1);
-    }
-  }
+
   #list {
     padding: 0;
     margin: 0;
@@ -124,12 +71,15 @@
         }
       }
 
-      .todo-tomato {
+      .todo-tomato-div {
         display: inline-block;
-        padding-top: 12px;
-        width: 15px;
+        width: 140px;
+        .todo-tomato {
+          display: inline-block;
+          padding-top: 12px;
+          width: 15px;
+        }
       }
-
       .add-tomato-btn {
         // padding-top: 6px;
         // outline: 0;
@@ -144,7 +94,7 @@
         }
       }
 
-      .rm-tomato-btn {
+      .rm-todo-btn {
         // padding-top: 6px;
         // outline: 0;
         display: none;
@@ -156,9 +106,6 @@
         &:hover {
           cursor: pointer;
         }
-      }
-      .abandoned-tomato {
-        z-index: -1;
       }
     }
   }

@@ -2,7 +2,11 @@
     "extends": ["airbnb-base"],
     "env": {
         "browser": true,
-        "webextensions": true,
+        "webextensions": true
+    },
+    "rules": {
+      "no-console": "off",
+      "no-return-assign": "warn",
+      "no-param-reassign": "warn"
     }
 }
-  

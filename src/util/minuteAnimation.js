@@ -11,7 +11,8 @@ function show(startTime) {
   const workHalfDeg = startDate.getMinutes() / 60 * 360 + startDate.getSeconds() / 60 * 6 - 45;
   const invisibleHalfDeg = workHalfDeg + 180;
   const restHalfDeg = workHalfDeg + ((25 / 60) * 360);
-  const doneHalfDeg = currentDate.getMinutes() / 60 * 360 + currentDate.getSeconds() / 60 * 6 + 180 - 45;
+  const doneHalfDeg = currentDate.getMinutes() / 60 * 360
+   + currentDate.getSeconds() / 60 * 6 + 180 - 45;
 
   document.querySelector('.work-half').style.transform = `rotate(${workHalfDeg}deg)`;
   document.querySelectorAll('.invisible-half').forEach(el => el.style.transform = `rotate(${invisibleHalfDeg}deg)`);

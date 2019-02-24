@@ -2,6 +2,9 @@
 extension.crx
 dist
 .DS_Store
+oldAssets
+marketing.md
+
 # Logs
 logs
 *.log

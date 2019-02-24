@@ -4,10 +4,12 @@
   "description": "Schedule your time with a clock",
   "main": "index.js",
   "scripts": {
-    "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel watch src/index.html --public-url '.' --no-cache",
+    "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel src/background.js  src/index.html --public-url '.' --no-cache",
     "startBackground": "parcel watch src/background.js --no-cache",
+    "build": "rm -r dist && parcel build src/background.js src/index.html --public-url '.' --no-source-maps && cp src/manifest.json dist/manifest.json && cp -r src/assets dist",
     "packDisk": "crx pack dist -o extension.crx",
-    "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'"
+    "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'",
+    "lint": "eslint ./src"
   },
   "repository": {
     "type": "git",
@@ -21,25 +23,20 @@
   },
   "homepage": "https://github.com/getPie/Pie#readme",
   "dependencies": {
-    "ch": "^0.3.0",
-    "chrome-storage-promise": "^0.1.0",
-    "dateformat": "^3.0.3",
-    "driver.js": "^0.7.1",
+    "calendar-graph": "^1.0.0",
     "sortablejs": "^1.7.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-register": "^6.26.0",
-    "babel-runtime": "^6.26.0",
     "crx": "^3.2.1",
-    "eslint": "^5.5.0",
+    "eslint": "^5.14.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
-    "node-sass": "^4.9.2",
+    "node-sass": "^4.11.0",
+    "parcel": "^1.11.0",
     "should": "^13.2.3"
-  }
+  },
+  "browserslist": [
+    "since 2017-06"
+  ]
 }
