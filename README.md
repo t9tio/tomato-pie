@@ -1,11 +1,11 @@
 
-<p align="center">
-  <img height="200" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie-header.gif">
-</p>
-
 # Tomato Pie
 
+<img align="left" width="100" height="100" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie-header.gif">
+
 A new UI for Pomodoro Technique
+
+---
 
 ## Install
 
