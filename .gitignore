@@ -1,5 +1,5 @@
 .cache
-extension.crx
+*.crx
 dist
 .DS_Store
 oldAssets

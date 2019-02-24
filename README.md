@@ -1,7 +1,7 @@
 
-<center>
-  <img src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif"></img>
-</center>
+<p align="center">
+  <img width="460" height="300" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
+</p>
 
 # Tomato Pie
 
