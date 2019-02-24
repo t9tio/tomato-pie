@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img height="200" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
+  <img height="200" src="![](https://raw.githubusercontent.com/timqian/images/master/tomatopie-header.gif)">
 </p>
 
 # Tomato Pie
@@ -13,7 +13,7 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
 
 ## Usage
 
-### Editing TODO list
+### Editing Todo list
 
 ![](https://raw.githubusercontent.com/timqian/images/master/tomatopie-intro1.gif)
 
