@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img width="460" height="300" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
+  <img height="250" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie.gif">
 </p>
 
 # Tomato Pie
@@ -41,7 +41,7 @@ git clone https://github.com/t9tio/tomato-pie
 
 - Clock styles: https://codepen.io/collection/moAia/2/
 
-## tec notes
+## Tech notes
 
 - Make background.js always running [ref](https://stackoverflow.com/questions/17119266/how-do-i-keep-my-app-from-going-inactive):
   1. in`manifest.json`, add  `background` in `permission` key
