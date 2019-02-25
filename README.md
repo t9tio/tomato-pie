@@ -5,13 +5,23 @@
 
 # Tomato Pie
 
-A new UI for Pomodoro Technique
+A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
 
 ## Install
 
 From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi) or [manually](https://github.com/t9tio/tomato-pie/releases)
 
-## Usage
+## Features
+
+- A [reminder](https://support.apple.com/zh-cn/guide/reminders/welcome/mac) like todo list
+- Pomodoro Technique
+  - show tomatoes of last 12 hours on clock
+  - red part: 25 minutes for one tomato
+  - green part: 5 minutes for rest
+  - get notifications when a tomato is finished
+  - view tomato history
+
+## Screenshots
 
 ### Editing Todo list
 
