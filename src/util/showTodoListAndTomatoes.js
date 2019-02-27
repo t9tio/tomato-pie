@@ -129,7 +129,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
       }
       if (lastCurrentStartAt && lastCurrentStartAt > startTime - 1000 * 60 * 25) {
         // ask user if he want to abandon last tomato
-        const isConfimed = window.confirm('You are doing an tomato now, if you start a new one, the urrent one will be abandoned.');
+        const isConfimed = window.confirm('You are doing an tomato now, if you start a new one, the current one will be abandoned.');
         if (isConfimed) {
           await store.Tomato.pop();
           await startNewTomato();
