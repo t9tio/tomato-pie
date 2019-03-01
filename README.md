@@ -43,10 +43,11 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
 
 store ==> render function ==> view =update=> store
 
-## Build
+## Build and publish
 
 ```bash
-git clone https://github.com/t9tio/tomato-pie
+npm run build
+# zip dist file and upload to chrome webstore
 ```
 
 ## Refs

@@ -7,7 +7,7 @@ function generateCalender() {
   const groupedTomatoes = tomatoes
     .map((tomato) => {
       const date = new Date(tomato.startAt);
-      const dateStr = `${date.getFullYear()}-${date.getMonth() + 1 <= 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate()}`;
+      const dateStr = `${date.getFullYear()}-${date.getMonth() + 1 <= 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}-${date.getDate() <= 9 ? `0${date.getDate()}` : date.getDate()}`;
       return {
         date: dateStr,
         tomatoes: [tomato],
@@ -55,7 +55,8 @@ function generateCalender() {
   function tooltipInit() {
     const tip = document.getElementById('tooltip');
     const elems = document.getElementsByClassName('cg-day');
-    const mouseOver = function (e) {
+
+    const mouseOver = (e) => {
       e = e || window.event;
       const elem = e.target || e.srcElement;
       const rect = elem.getBoundingClientRect();
@@ -67,10 +68,11 @@ function generateCalender() {
       tip.style.left = `${rect.left - (w / 2) + 6}px`;
       tip.style.top = `${rect.top - 30}px`;
     };
-    const mouseOut = function () {
-      e = e || window.event;
+
+    const mouseOut = () => {
       tip.style.display = 'none';
     };
+
     for (let i = 0; i < elems.length; i++) {
       if (document.body.addEventListener) {
         elems[i].addEventListener('mouseover', mouseOver, false);
