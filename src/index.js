@@ -1,5 +1,6 @@
 import './styles/index.scss';
 import './styles/todo.scss';
+import './styles/switch.scss';
 import './styles/statics.scss';
 import './util/generateClockAnimations';
 
@@ -65,42 +66,67 @@ document.querySelector('#input').addEventListener('keyup', async (e) => {
   }
 });
 
-// calendar statics
 const calenderDiv = document.querySelector('.calendar');
-const showStaticImg = document.querySelector('.show-statics');
+const textareaDiv = document.querySelector('.textarea-div');
+const calToggle = document.querySelector('#cb1');
+const texToggle = document.querySelector('#cb2');
 
-function renderStaticsAccordingToStore() {
-  const isShow = store.ShowInfo.get();
-  if (isShow) {
+function renderCalTexAccordingToStore() {
+  const isShowCal = store.ShowStatics.get();
+  const isShowTex = store.ShowTextarea.get();
+
+  if (isShowCal) {
     calenderDiv.classList.remove('invisible');
-    showStaticImg.src = './assets/staticsActiveIco.svg';
+    calToggle.checked = isShowCal;
   } else {
     calenderDiv.classList.add('invisible');
-    showStaticImg.src = './assets/staticsIco.svg';
+  }
+
+  if (isShowTex) {
+    textareaDiv.classList.remove('invisible');
+    texToggle.checked = isShowTex;
+  } else {
+    textareaDiv.classList.add('invisible');
   }
 }
 
-renderStaticsAccordingToStore();
+renderCalTexAccordingToStore();
 
-showStaticImg.addEventListener('click', () => {
-  if (Array.from(calenderDiv.classList).includes('invisible')) {
-    store.ShowInfo.set(true);
-    renderStaticsAccordingToStore();
-  } else {
-    store.ShowInfo.set(false);
-    renderStaticsAccordingToStore();
-  }
+calToggle.addEventListener('click', () => {
+  store.ShowStatics.set(calToggle.checked);
+  renderCalTexAccordingToStore();
+});
+
+texToggle.addEventListener('click', () => {
+  store.ShowTextarea.set(texToggle.checked);
+  renderCalTexAccordingToStore();
 });
 
 // show info
 const showInfoImg = document.querySelector('.show-info');
 const infoDiv = document.querySelector('.info-div');
 
-showInfoImg.addEventListener('click', () => {
+// hide setting page ref: https://stackoverflow.com/a/153047
+document.addEventListener('click', () => {
+  infoDiv.classList.add('invisible');
+});
+
+showInfoImg.addEventListener('click', (event) => {
+  event.stopPropagation();
+
   if (Array.from(infoDiv.classList).includes('invisible')) {
     infoDiv.classList.remove('invisible');
   } else {
-    store.ShowInfo.set(false);
     infoDiv.classList.add('invisible');
   }
 });
+
+infoDiv.addEventListener('click', (event) => {
+  event.stopPropagation();
+});
+
+const textarea = document.querySelector('.textarea');
+
+textarea.value = store.Textarea.get();
+
+textarea.addEventListener('input', () => store.Textarea.set(textarea.value));

@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel src/background.js  src/index.html --public-url '.' --no-cache",
-    "startBackground": "parcel watch src/background.js --no-cache",
     "build": "rm -r dist && parcel build src/background.js src/index.html --public-url '.' --no-source-maps && cp src/manifest.json dist/manifest.json && cp -r src/assets dist",
     "packDisk": "crx pack dist -o tomato-pie.crx",
     "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'",

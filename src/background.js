@@ -3,8 +3,7 @@ import store from './store';
 // adjust time speed
 const oneMinute = 60 * 1000;
 
-// open new tab when click ico
-// ref: https://stackoverflow.com/questions/3188384/google-chrome-extensions-open-new-tab-when-clicking-a-toolbar-icon
+// open new tab when click icon; ref: https://stackoverflow.com/a/14682627/4674834
 chrome.browserAction.onClicked.addListener(() => {
   window.focus();
   chrome.tabs.create({});
@@ -16,7 +15,6 @@ chrome.notifications.onClicked.addListener((notificationId) => {
   chrome.tabs.create({});
   chrome.notifications.clear(notificationId);
 });
-
 
 let current = 25;
 let rest = 5;
@@ -56,8 +54,8 @@ async function updateCurrent() {
       iconUrl: 'assets/tomato.png',
       title: 'Tomato got, take a break~',
       message: (new Date()).toLocaleTimeString(),
-      // requireInteraction: true,  // do not close until click
-      eventTime: Date.now() + 1000 * 10,
+      requireInteraction: true, // do not close until click
+      // eventTime: Date.now() + 1000 * 10,
     });
   } else {
     chrome.browserAction.setBadgeText({ text: `${current.toString()}m` });

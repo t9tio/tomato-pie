@@ -3,6 +3,12 @@
  *
  * currentStartAt: 132413241234,
  *
+ * isShowStatics: boolean,
+ *
+ * isShowTextarea: boolean,
+ *
+ * textareData: string,
+ *
  * tomatoList: [{
  *   startAt: 1533653542468, // also used as id
  *   todoId: 1533653542468,
@@ -20,15 +26,31 @@
  * }]
  */
 
-const ShowInfo = {
-  get: () => localStorage.getItem('isShowInfo'),
+const ShowStatics = {
+  get: () => localStorage.getItem('isShowStatics'),
   set: (boolean) => {
     if (boolean) {
-      localStorage.setItem('isShowInfo', true);
+      localStorage.setItem('isShowStatics', true);
     } else {
-      localStorage.removeItem('isShowInfo');
+      localStorage.removeItem('isShowStatics');
     }
   },
+};
+
+const ShowTextarea = {
+  get: () => localStorage.getItem('isShowTextarea'),
+  set: (boolean) => {
+    if (boolean) {
+      localStorage.setItem('isShowTextarea', true);
+    } else {
+      localStorage.removeItem('isShowTextarea');
+    }
+  },
+};
+
+const Textarea = {
+  get: () => localStorage.getItem('textareaData'),
+  set: content => localStorage.setItem('textareaData', content),
 };
 
 const CurrentStartAt = {
@@ -134,7 +156,9 @@ const Done = {
 
 // TODO: todo tags??
 export default {
-  ShowInfo,
+  ShowStatics,
+  ShowTextarea,
+  Textarea,
   CurrentStartAt,
   Tomato,
   Todo,

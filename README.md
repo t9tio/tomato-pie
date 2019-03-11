@@ -54,13 +54,7 @@ npm run build
 
 - Clock styles: https://codepen.io/collection/moAia/2/
 
-## Tech notes
-
-- Make background.js always running [ref](https://stackoverflow.com/questions/17119266/how-do-i-keep-my-app-from-going-inactive):
-  1. in`manifest.json`, add  `background` in `permission` key
-  2. in `manifest.json`, don't add `persistence: false` in `background` key
-
-## Similar tools
+#### Similar tools
 
 - https://chrome.google.com/webstore/detail/marinara-pomodoro%C2%AE-assist/lojgmehidjdhhbmpjfamhpkpodfcodef
 - https://chrome.google.com/webstore/detail/task-timer/aomfjmibjhhfdenfkpaodhnlhkolngif
@@ -68,6 +62,21 @@ npm run build
 - https://chrome.google.com/webstore/detail/timer-25-the-minimalist-t/gmdbcklinofignhfmibchnmgjcocccbh
 - https://chrome.google.com/webstore/detail/timecamp-timer/ohbkdjmhoegleofcohdjagmcnkimfdaa
 - https://chrome.google.com/webstore/detail/timer-25-the-minimalist-t/gmdbcklinofignhfmibchnmgjcocccbh
+
+## Tech notes
+
+- Make background.js always running [ref](https://stackoverflow.com/questions/17119266/how-do-i-keep-my-app-from-going-inactive):
+  1. in`manifest.json`, add  `background` in `permission` key
+  2. in `manifest.json`, don't add `persistence: false` in `background` key
+- clock animation: https://codepen.io/Alca/pen/ZeKjmB
+
+## Updates
+
+- 2019-03-07: add textarea; preventing notification disappearing #4
+
+## Plans
+
+- notify user when extension is updated [ref](https://developer.chrome.com/extensions/runtime#event-onInstalled)
 
 ## Thanks
 

@@ -1,24 +1,24 @@
 $distance-to-edge: 15px;
 
-.show-statics {
-  position: fixed;
-  bottom: $distance-to-edge;
-  left: 20px;
-  width: 30px;
-  &:hover {
-    cursor: pointer;
-  };
-  z-index: 0;
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 1em 0;
+  padding: 0;
 }
 
 .show-info {
   position: fixed;
-  bottom: 55px;
+  bottom: $distance-to-edge;
   left: 20px;
   width: 30px;
+
   &:hover {
     cursor: pointer;
   };
+
   z-index: 0;
 }
 
@@ -31,7 +31,7 @@ $distance-to-edge: 15px;
   left: 0;
   padding: 6px;
   // margin-right: 70px;
-  border: solid 1px #ddd;
+  border: solid 1px #eee;
   border-radius: 3px;
 }
 
@@ -41,8 +41,8 @@ $distance-to-edge: 15px;
   left: 0;
   top: 0;
   height: 23px;
-  background-color: rgba(0, 0, 0, .8);
-  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: transparent;
   padding: 4px 10px;
   border-radius: 3px;
   z-index: 1;
@@ -55,25 +55,74 @@ $distance-to-edge: 15px;
   bottom: -6px;
   left: 50%;
   margin-left: -6px;
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
-  border-top: 6px solid rgba(0, 0, 0, .8);
+  border-top: 6px solid rgba(0, 0, 0, 0.8);
 }
 
 .info-div {
   position: fixed;
-  left: 45px;
+  left: 60px;
   bottom: $distance-to-edge;
   line-height: 1.5;
   color: #888;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px #eee;
 
   ul {
     margin: 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      padding-top: 5px;
+    }
   }
 
   a {
     color: #7bc96f;
   }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    // text-align: right;
+    list-style-type: none;
+  }
+}
+
+.textarea {
+  resize: none;
+  background: transparent;
+  font-size: 15px;
+  position: fixed;
+  top: 50px;
+  right: $distance-to-edge;
+  width: 280px;
+  height: 70%;
+  border: 0px solid #eee;
+  border-radius: 3px;
+  outline: 0;
+  // padding: 5px;
+  color: #555;
+  background-attachment:local;
+  // ref; https://css-tricks.com/fun-line-height/
+  line-height: 30px; //注意行高要和背景图高度一致resize: none;
+  background: repeating-linear-gradient(rgba(221, 221, 221, 0.53), rgba(221, 221, 221, 0.53) 1px, transparent 1px, transparent 30px) repeat;
+
+}
+
+::placeholder {
+  color: #ccc;
+  text-align: left;
+}
+
+.textarea-title {
+  position: fixed;
+  top: 0px;
+  right: $distance-to-edge;
 }

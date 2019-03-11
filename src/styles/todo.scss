@@ -2,16 +2,18 @@ $distance-to-edge: 15px;
 
 #todo-div {
   width: 450px;
-  margin: $distance-to-edge;
+  position: fixed;
+  left: $distance-to-edge;
+  top: $distance-to-edge;
+  // margin: $distance-to-edge;
   // transform: scale(1.1, 1.1);
   // transform-origin: left;
   // TODO: find another way if you want it bigger
   #todo-title {
-    margin-left: 6px;
-    margin-bottom: 0px;
+    margin: 0;
     padding-bottom: 6px;
     border-bottom: solid 1px #ddd;
-    width: 295px;
+    width: 297px;
   }
 
   #list {
@@ -27,7 +29,7 @@ $distance-to-edge: 15px;
       margin: 0;
       border: 0;
       &:hover {
-        background-color: #eee;
+        background-color: rgba(238, 238, 238, 0.473);
         cursor: move;
       }
       &.chosen {
@@ -38,14 +40,24 @@ $distance-to-edge: 15px;
         opacity: 0;
       }
       .checkbox {
-        font-size: 25px;
-        display: inline-block;
+        font-size: 13px;
+        width: 1.3em;
+        height: 1.3em;
+        background-color: white;
+        border-radius: 50%;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        -webkit-appearance: none;
+        outline: none;
+        cursor: pointer;
         vertical-align: top;
         margin-top: 12px;
-        // border-radius: 50%;
         &:hover {
           cursor: pointer;
         }
+        &:checked {
+          background-color: gray;
+      }
       }
       .content-div {
         display: inline-block;
@@ -113,7 +125,7 @@ $distance-to-edge: 15px;
   #input-div {
     width: 270px;
     margin-top: 10px;
-    margin-left: 32px;
+    margin-left: 28px;
     border-bottom: solid 1px #ddd;
     position: relative;
     #input {

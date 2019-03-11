@@ -2,10 +2,6 @@
   <meta charset="utf-8" />
   <title>Tomato Pie</title>
   <style id="clock-animations"></style>
-  <!-- <link rel="icon" href="https://assets-cdn.github.com/favicon.ico">
-    <link rel="apple-touch-icon" href="https://assets-cdn.github.com/favicon.ico">
-    <link rel="bookmark" href="https://assets-cdn.github.com/favicon.ico"> -->
-  <!-- <link rel="stylesheet" type="text/css" href="./index.css"/> -->
 </head>
 
 <body>
@@ -75,24 +71,46 @@
   <div class="calendar invisible"></div>
   <div id="tooltip">Hello world</div>
 
-  <div class="info-div  invisible">
+  <div class="info-div invisible">
     <ul>
       <li>
-        <a href="https://github.com/t9tio/tomato-pie/issues">Feedback</a>
+        <div style="display: inline-block;">
+          <input class="tgl tgl-light" id="cb1" type="checkbox" />
+          <label class="tgl-btn" for="cb1"></label>
+        </div>
+        Show statics
       </li>
-
       <li>
-        <a href="https://github.com/t9tio/tomato-pie/">Source code</a>
+        <div style="display: inline-block;">
+          <input class="tgl tgl-light" id="cb2" type="checkbox" />
+          <label class="tgl-btn" for="cb2"></label>
+        </div>
+        Show text area
       </li>
-      <li>Provided by <a href="http://t9t.io">t9t.io</a></li>
-      <li>Follow us on <a href="https://twitter.com/t9tio">twitter</a></li>
+      <!-- <li>
+        <div style="display: inline-block;">
+          <input class="tgl tgl-light" id="cb3" type="checkbox"/>
+          <label class="tgl-btn" for="cb3"></label>
+        </div>
+        As default new tab 
+      </li> -->
     </ul>
-  </div>
-  <img
-    class="show-statics"
-    src="./assets/staticsIco.svg"
-    placeholder="statics"
-  />
+    <hr/>
+      <ol>
+        <li>
+
+          <a href="https://github.com/t9tio/tomato-pie/">About</a>
+        </li>
+        <li>
+          <a href="https://github.com/t9tio/tomato-pie/issues">Feedback</a>
+        </li>
+      </ol>
+    </div>
+
+    <div class="textarea-div invisible">
+      <h1 class="textarea-title">Text Area</h1>
+      <textarea class="textarea" placeholder="Here you can record thoughts, plans or anything you want" spellcheck="false"></textarea>
+    </div>
   <img class="show-info" src="./assets/information.svg" placeholder="info" />
   <script src="./index.js"></script>
 </body>
