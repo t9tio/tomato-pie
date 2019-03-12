@@ -30,8 +30,6 @@ function generateCalender() {
       };
     });
 
-  console.log(groupedTomatoes);
-
   const calender = new SVGGraph('.calendar', groupedTomatoes, {
     // startDate: new Date(new Date().getTime() - 1000 * 60 * 60 * 24 * 365),
     // endDate: new Date(),

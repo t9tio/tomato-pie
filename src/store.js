@@ -3,6 +3,8 @@
  *
  * currentStartAt: 132413241234,
  *
+ * isDefaultNewTab: boolean,
+ *
  * isShowStatics: boolean,
  *
  * isShowTextarea: boolean,
@@ -26,24 +28,61 @@
  * }]
  */
 
-const ShowStatics = {
-  get: () => localStorage.getItem('isShowStatics'),
+// null; true; false;
+const DefaultNewTab = {
+  // TODO: write function to remove code duplication
+  get: () => {
+    const item = localStorage.getItem('isDefaultNewTab');
+    if (item === 'true') return true;
+    if (item === 'false') return false;
+    if (item === null) return null;
+    throw new Error('error getting boolean'); 
+  },
   set: (boolean) => {
-    if (boolean) {
-      localStorage.setItem('isShowStatics', true);
+    if (boolean === true) {
+      localStorage.setItem('isDefaultNewTab', 'true');
+    } else if (boolean === false) {
+      localStorage.setItem('isDefaultNewTab', 'false');
     } else {
-      localStorage.removeItem('isShowStatics');
+      throw new Error('error setting boolean, only allow true or false');
+    }
+  },
+};
+
+const ShowStatics = {
+  get: () => {
+    const item = localStorage.getItem('isShowStatics');
+    if (item === 'true') return true;
+    if (item === 'false') return false;
+    if (item === null) return null;
+    throw new Error('error getting boolean'); 
+  },
+  set: (boolean) => {
+    if (boolean === true) {
+      localStorage.setItem('isShowStatics', 'true');
+    } else if (boolean === false) {
+      localStorage.setItem('isShowStatics', 'false');
+    } else {
+      throw new Error('error setting boolean, only allow true or false');
     }
   },
 };
 
 const ShowTextarea = {
-  get: () => localStorage.getItem('isShowTextarea'),
+  get: () => {
+    const item = localStorage.getItem('isShowTextarea');
+    if (item === 'true') return true;
+    if (item === 'false') return false;
+    if (item === null) return null;
+    throw new Error('error getting boolean'); 
+  },
   set: (boolean) => {
-    if (boolean) {
-      localStorage.setItem('isShowTextarea', true);
+    if (boolean === true) {
+      localStorage.setItem('isShowTextarea', 'true');
+    } else if (boolean === false) {
+      localStorage.setItem('isShowTextarea', 'false');
     } else {
-      localStorage.removeItem('isShowTextarea');
+      throw new Error('error setting boolean, only allow true or false');
     }
   },
 };
@@ -156,6 +195,7 @@ const Done = {
 
 // TODO: todo tags??
 export default {
+  DefaultNewTab,
   ShowStatics,
   ShowTextarea,
   Textarea,

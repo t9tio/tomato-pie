@@ -9,8 +9,19 @@ import generateCalender from './util/generateCalender';
 import store from './store';
 import showTodoListAndTomatoes from './util/showTodoListAndTomatoes';
 
+// decide if show tomato-pie or default page
+const isDefaultNewTab = store.DefaultNewTab.get();
+
+if (isDefaultNewTab === null) {
+  store.DefaultNewTab.set(true);
+}
+
+if (!window.location.hash && isDefaultNewTab === false) {
+  chrome.tabs.update({ url: 'chrome-search://local-ntp/local-ntp.html' });
+}
+
 // show minuteAnimation and set extension badge if there is tomato running
-(async function showMinuteAnimationAndExtensionBadge() {
+async function showMinuteAnimationAndExtensionBadge() {
   const currentStartAt = await store.CurrentStartAt.get();
   if (currentStartAt && new Date().getTime() - currentStartAt < 1000 * 60 * 30) {
     minuteAnimation.show(currentStartAt);
@@ -18,17 +29,18 @@ import showTodoListAndTomatoes from './util/showTodoListAndTomatoes';
     await store.CurrentStartAt.remove();
     chrome.browserAction.setBadgeText({ text: '' });
   }
-}());
+}
+showMinuteAnimationAndExtensionBadge();
 
 generateCalender();
 
 // show todoList and tomatoes
-(async function showTodosAndTomatoes() {
+async function showTodosAndTomatoes() {
   const tomatoesLast12H = await store.Tomato.get12h();
   const todoList = await store.Todo.getAll();
   await showTodoListAndTomatoes(todoList, tomatoesLast12H);
-}());
-
+}
+showTodosAndTomatoes();
 
 document.querySelector('#input-div').addEventListener('mouseover', () => {
   document.querySelector('#add-todo').style.display = 'inline-block';
@@ -66,28 +78,33 @@ document.querySelector('#input').addEventListener('keyup', async (e) => {
   }
 });
 
+// settings
 const calenderDiv = document.querySelector('.calendar');
 const textareaDiv = document.querySelector('.textarea-div');
 const calToggle = document.querySelector('#cb1');
 const texToggle = document.querySelector('#cb2');
+const defToggle = document.querySelector('#cb3');
 
 function renderCalTexAccordingToStore() {
   const isShowCal = store.ShowStatics.get();
   const isShowTex = store.ShowTextarea.get();
+  const isDefaultTab = store.DefaultNewTab.get();
 
   if (isShowCal) {
     calenderDiv.classList.remove('invisible');
-    calToggle.checked = isShowCal;
+    calToggle.checked = true;
   } else {
     calenderDiv.classList.add('invisible');
   }
 
   if (isShowTex) {
     textareaDiv.classList.remove('invisible');
-    texToggle.checked = isShowTex;
+    texToggle.checked = true;
   } else {
     textareaDiv.classList.add('invisible');
   }
+
+  defToggle.checked = isDefaultTab;
 }
 
 renderCalTexAccordingToStore();
@@ -99,6 +116,11 @@ calToggle.addEventListener('click', () => {
 
 texToggle.addEventListener('click', () => {
   store.ShowTextarea.set(texToggle.checked);
+  renderCalTexAccordingToStore();
+});
+
+defToggle.addEventListener('click', () => {
+  store.DefaultNewTab.set(defToggle.checked);
   renderCalTexAccordingToStore();
 });
 

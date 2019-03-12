@@ -6,13 +6,13 @@ const oneMinute = 60 * 1000;
 // open new tab when click icon; ref: https://stackoverflow.com/a/14682627/4674834
 chrome.browserAction.onClicked.addListener(() => {
   window.focus();
-  chrome.tabs.create({});
+  chrome.tabs.create({ url: chrome.extension.getURL('index.html#from_action') });
 });
 
 // open new tab when click notification
 chrome.notifications.onClicked.addListener((notificationId) => {
   window.focus();
-  chrome.tabs.create({});
+  chrome.tabs.create({ url: chrome.extension.getURL('index.html#from_action') });
   chrome.notifications.clear(notificationId);
 });
 

@@ -1,11 +1,11 @@
 {
-  "name": "pie",
+  "name": "tomato-pie",
   "version": "1.0.0",
   "description": "Schedule your time with a clock",
   "main": "index.js",
   "scripts": {
-    "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel src/background.js  src/index.html --public-url '.' --no-cache",
-    "build": "rm -r dist && parcel build src/background.js src/index.html --public-url '.' --no-source-maps && cp src/manifest.json dist/manifest.json && cp -r src/assets dist",
+    "start": "cp src/background.js dist/background.js && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && parcel watch src/background.js src/index.html --public-url '.' --no-cache",
+    "build": "rm -r dist && rm dist.zip && parcel build src/background.js src/index.html --public-url '.' --no-source-maps && cp src/manifest.json dist/manifest.json && cp -r src/assets dist && zip -r dist.zip dist",
     "packDisk": "crx pack dist -o tomato-pie.crx",
     "test": "mocha --require babel-polyfill --require babel-register -u qunit './**/*.spec.js'",
     "lint": "eslint ./src"
@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/getPie/Pie.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "timqian",
   "bugs": {
     "url": "https://github.com/getPie/Pie/issues"
   },
