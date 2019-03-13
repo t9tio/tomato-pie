@@ -5,37 +5,72 @@ import minuteAnimation from './minuteAnimation';
 // communicate with background page: https://stackoverflow.com/a/11967860/4674834
 const backgroundPage = chrome.extension.getBackgroundPage();
 
-async function showTodoListAndTomatoes(todoList, tomatoes) {
+async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
   const currentStartAt = await store.CurrentStartAt.get();
 
   // calculate tomato angle and display them
   const tomatoContainer = document.getElementById('tomato-container');
-  const tomatoHTMLs = tomatoes
+  const tomatoHTMLs = tomatoesLast12H
     .map((tomato) => {
       const now = new Date();
       if (tomato.startAt === currentStartAt
         && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
-        return `<img id="tomato-${tomato.startAt}" src="./assets/onGoingTomato.svg" width="22px"/>`;
+        return `<img class="tomato-around-clock" id="tomato-${tomato.startAt}" src="./assets/onGoingTomato.svg" width="22px"/>`;
       }
-      return `<img id="tomato-${tomato.startAt}" src="./assets/tomato.svg" width="22px"/>`;
+      return `<img class="tomato-around-clock" id="tomato-${tomato.startAt}" src="./assets/tomato.svg" width="22px"/>`;
     });
   tomatoContainer.innerHTML = tomatoHTMLs.join('');
-  tomatoes.forEach((tomato) => {
+
+  tomatoesLast12H.forEach((tomato) => {
     const { startAt } = tomato;
     const date = new Date(startAt);
     const angle = date.getHours() / 12 * 360 + date.getMinutes() / 60 * 30 + 30 / 4;
     const tomatoEl = document.querySelector(`#tomato-${tomato.startAt}`);
-    tomatoEl.style.position = 'absolute';
-    tomatoEl.style.zIndex = 6;
-    tomatoEl.style.margin = '113px 114px';
     tomatoEl.style.transform = `rotate(${angle}deg) translateY(-140px)`;
-    tomatoEl.style.display = 'block';
+
+    tomatoEl.addEventListener('click', async () => {
+      const isConfimed = window.confirm('Do you want to abandon this tomato?');
+      if (isConfimed) {
+        store.Tomato.remove(tomato.startAt);
+
+        // if the abandoned tomato is current one; clear currentStartAt and badge on action
+        if (currentStartAt === tomato.startAt) {
+          store.CurrentStartAt.remove();
+          chrome.browserAction.setBadgeText({ text: '' });
+          minuteAnimation.hide();
+        }
+
+        const tomatoes12H = store.Tomato.get12h();
+
+        await showTodoListAndTomatoes(todoList, tomatoes12H);
+      }
+    });
+
+    tomatoEl.addEventListener('mouseover', () => {
+      const now = new Date();
+      if (tomato.startAt === currentStartAt
+        && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
+        tomatoEl.src = './assets/abandonTomatoOnGoing.svg';
+      } else {
+        tomatoEl.src = './assets/abandonTomato.svg';
+      }
+    });
+
+    tomatoEl.addEventListener('mouseout', () => {
+      const now = new Date();
+      if (tomato.startAt === currentStartAt
+        && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
+        tomatoEl.src = './assets/onGoingTomato.svg';
+      } else {
+        tomatoEl.src = './assets/tomato.svg';
+      }
+    });
   });
 
   // show todo list
   const ul = document.getElementById('list');
   const todoHTMLs = todoList.map((todo) => {
-    const todoTomatoHTMLs = tomatoes
+    const todoTomatoHTMLs = tomatoesLast12H
       .filter(tomato => tomato.todoId === todo.createdAt)
       .map((tomato) => {
         const now = new Date();
@@ -71,7 +106,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
     onEnd: async (e) => {
       const { oldIndex, newIndex } = e;
       const newTodoList = await store.Todo.move(oldIndex, newIndex);
-      await showTodoListAndTomatoes(newTodoList, tomatoes);
+      await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
     },
   });
 
@@ -86,24 +121,24 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
       rmTomatoBtn.style.display = 'inline-block';
       addTomatoBtn.style.display = 'inline-block';
       const liTomatoEls = document.querySelectorAll(`#todo-${todo.createdAt} .todo-tomato`);
-      liTomatoEls.forEach(tomatoEl => tomatoEl.style.opacity = '.35');
-      tomatoes
+      liTomatoEls.forEach(tomatoEl => tomatoEl.classList.add('highlighted-tomato'));
+      tomatoesLast12H
         .filter(tomato => tomato.todoId === todo.createdAt)
         .forEach((tomato) => {
           const clockTomatoEl = document.querySelector(`#tomato-${tomato.startAt}`);
-          clockTomatoEl.style.opacity = '.35';
+          clockTomatoEl.classList.add('highlighted-tomato');
         });
     });
     li.addEventListener('mouseleave', () => {
       addTomatoBtn.style.display = 'none';
       rmTomatoBtn.style.display = 'none';
       const liTomatoEls = document.querySelectorAll(`#todo-${todo.createdAt} .todo-tomato`);
-      liTomatoEls.forEach(tomato => tomato.style.opacity = '1');
-      tomatoes
+      liTomatoEls.forEach(tomato => tomato.classList.remove('highlighted-tomato'));
+      tomatoesLast12H
         .filter(tomato => tomato.todoId === todo.createdAt)
         .forEach((tomato) => {
           const clockTomatoEl = document.querySelector(`#tomato-${tomato.startAt}`);
-          clockTomatoEl.style.opacity = '1';
+          clockTomatoEl.classList.remove('highlighted-tomato');
         });
     });
 
@@ -154,7 +189,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
       e.preventDefault();
       const newTodoList = await store.Todo.remove(todo.createdAt);
       await store.Done.push(todo);
-      await showTodoListAndTomatoes(newTodoList, tomatoes);
+      await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
     });
 
     // content-div editable updating todo content
@@ -164,7 +199,7 @@ async function showTodoListAndTomatoes(todoList, tomatoes) {
       if (e.inputType === 'insertParagraph' || (e.inputType === 'insertText' && e.data === null)) {
         // rerender the list to make sure user loose mouse focus
         const newTodoList = await store.Todo.getAll();
-        await showTodoListAndTomatoes(newTodoList, tomatoes);
+        await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
       } else {
         const newContent = contentDiv.textContent;
         await store.Todo.update(todo.createdAt, newContent);

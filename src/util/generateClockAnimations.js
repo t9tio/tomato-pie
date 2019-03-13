@@ -11,7 +11,7 @@ function generateClockAnimations() {
     `@keyframes rotate-second{from{transform:rotate(${secondDeg}deg);}to{transform:rotate(${secondDeg + 360}deg);}}`,
   ].join('');
 
-  document.getElementById('clock-animations').innerHTML = stylesDeg;
+  document.getElementById('clock-animations-style').innerHTML = stylesDeg;
 }
 
 generateClockAnimations();

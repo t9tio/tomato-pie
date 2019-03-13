@@ -4,6 +4,7 @@
  */
 function show(startTime) {
   if (typeof startTime !== 'number') throw new Error('startTime should be number');
+  document.getElementById('minite-animition-div').classList.remove('invisible');
   const startDate = new Date(startTime);
   const currentDate = new Date();
 
@@ -19,7 +20,7 @@ function show(startTime) {
   document.querySelector('.rest-half').style.transform = `rotate(${restHalfDeg}deg)`;
   document.querySelector('.done-half').style.transform = `rotate(${doneHalfDeg}deg)`;
 
-  document.getElementById('clock-animations').innerHTML = `${document.getElementById('clock-animations').innerHTML}
+  document.getElementById('clock-animations-style').innerHTML = `${document.getElementById('clock-animations-style').innerHTML}
     @keyframes rotate-done-minute {
       from {
         transform: rotate(${doneHalfDeg}deg);
@@ -32,10 +33,10 @@ function show(startTime) {
 }
 
 /**
- * Hide tomato animation
+ * Hide tomato 30 min animation
  */
 function hide() {
-
+  document.getElementById('minite-animition-div').classList.add('invisible');
 }
 
 export default {

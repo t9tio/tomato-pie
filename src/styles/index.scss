@@ -23,8 +23,23 @@ body {
   padding: 0;
 }
 
+.tomato-around-clock {
+  position: absolute;
+  z-index: 6;
+  margin: 113px 114px;
+  display: block;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .invisible {
   display: none;
+}
+
+.highlighted-tomato {
+  opacity: 0.35;
 }
 
 .clock-wrapper {

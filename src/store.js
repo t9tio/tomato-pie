@@ -36,7 +36,7 @@ const DefaultNewTab = {
     if (item === 'true') return true;
     if (item === 'false') return false;
     if (item === null) return null;
-    throw new Error('error getting boolean'); 
+    throw new Error('error getting boolean');
   },
   set: (boolean) => {
     if (boolean === true) {
@@ -55,7 +55,7 @@ const ShowStatics = {
     if (item === 'true') return true;
     if (item === 'false') return false;
     if (item === null) return null;
-    throw new Error('error getting boolean'); 
+    throw new Error('error getting boolean');
   },
   set: (boolean) => {
     if (boolean === true) {
@@ -74,7 +74,7 @@ const ShowTextarea = {
     if (item === 'true') return true;
     if (item === 'false') return false;
     if (item === null) return null;
-    throw new Error('error getting boolean'); 
+    throw new Error('error getting boolean');
   },
   set: (boolean) => {
     if (boolean === true) {
@@ -124,6 +124,12 @@ const Tomato = {
   pop: () => {
     const cur = JSON.parse(localStorage.getItem('tomatoList'));
     const next = cur.slice(0, -1);
+    localStorage.setItem('tomatoList', JSON.stringify(next));
+    return next;
+  },
+  remove: (startAt) => {
+    const cur = JSON.parse(localStorage.getItem('tomatoList'));
+    const next = cur.filter(tomato => tomato.startAt !== startAt);
     localStorage.setItem('tomatoList', JSON.stringify(next));
     return next;
   },
