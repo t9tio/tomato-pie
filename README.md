@@ -5,7 +5,7 @@
 
 # Tomato Pie
 
-A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique)
+A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). Schedule your time with a clock.
 
 ## Install
 
@@ -20,7 +20,7 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
   - green part: 5 minutes for rest
   - get notifications when a tomato is finished
   - view tomato history
-- override default page for new tab (You can always turn it off at `chrome://settings/`)
+- override default page for new tab
 - indicate time on the extension icon
 
 ## Screenshots

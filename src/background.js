@@ -69,7 +69,7 @@ function startTimer() {
   current = 25;
   rest = 5;
 
-  // when calling startTimer multiple times, previous timeout should be cleard
+  // when calling startTimer multiple times, previous timeout should be cleared
   clearTimeout(currentTimeout);
   clearTimeout(restTimeout);
   updateCurrent();
