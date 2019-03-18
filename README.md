@@ -13,15 +13,14 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
 
 ## Features
 
-- A [mac os reminder](https://support.apple.com/zh-cn/guide/reminders/welcome/mac) like todo list
-- Pomodoro Technique
-  - show tomatoes of last 12 hours on clock
-  - red part: 25 minutes for one tomato
-  - green part: 5 minutes for rest
-  - get notifications when a tomato is finished
-  - view tomato history
+- start new pomodoro from TODO list
+- red part: 25 minutes for one tomato
+- green part: 5 minutes for rest
+- show tomatoes of last 12 hours on clock
+- view tomato history on calendar
 - override default page for new tab
 - indicate time on the extension icon
+- get notifications when a tomato is finished
 
 ## Screenshots
 
