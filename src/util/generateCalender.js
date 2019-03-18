@@ -1,6 +1,22 @@
 import { SVGGraph } from 'calendar-graph';
 import store from '../store';
 
+/**
+ * group object array by certain key
+ * @ref https://stackoverflow.com/a/34890276/4674834
+ * @param {Array} xs group of objects
+ * @param {String} key object key
+ * @example
+ *  // {3: ["one", "two"], 5: ["three"]}
+ *  groupBy(['one', 'two', 'three'], 'length');
+ */
+function groupBy(xs, key) {
+  return xs.reduce((rv, x) => {
+    (rv[x[key]] = rv[x[key]] || []).push(x);
+    return rv;
+  }, {});
+}
+
 function generateCalender() {
   const tomatoes = store.Tomato.getAll();
 
@@ -23,10 +39,10 @@ function generateCalender() {
     }, [])
     .map((tomatoGroup) => {
       tomatoGroup.count = tomatoGroup.tomatoes.length;
-      // return tomatoGroup;
       return {
         date: tomatoGroup.date,
         count: tomatoGroup.count,
+        tomatoes: tomatoGroup.tomatoes,
       };
     });
 
@@ -53,7 +69,10 @@ function generateCalender() {
   function tooltipInit() {
     const tip = document.getElementById('tooltip');
     const elems = document.getElementsByClassName('cg-day');
+    const modal = document.getElementById('myModal');
+    const modalContent = document.getElementById('myModalContent');
 
+    // show tip
     const mouseOver = (e) => {
       e = e || window.event;
       const elem = e.target || e.srcElement;
@@ -67,19 +86,64 @@ function generateCalender() {
       tip.style.top = `${rect.top - 30}px`;
     };
 
+    // hide tip
     const mouseOut = () => {
       tip.style.display = 'none';
     };
 
-    for (let i = 0; i < elems.length; i++) {
-      if (document.body.addEventListener) {
-        elems[i].addEventListener('mouseover', mouseOver, false);
-        elems[i].addEventListener('mouseout', mouseOut, false);
+    // show statics
+    const mouseClick = (e) => {
+      e = e || window.event;
+      const elem = e.target || e.srcElement;
+      const date = elem.getAttribute('data-date');
+      const tomatoGroup = groupedTomatoes.filter(group => group.date === date)[0];
+
+      // only show modal when there are tomatoes in that day?
+      if (tomatoGroup) {
+        const todosObj = groupBy(tomatoGroup.tomatoes, 'todoId');
+        // [{"id":"1552873989450","todo":{"createdAt":1552873989450,"content":"\n \n seeking new idea"},"tomatos":[]}]
+        const todosArr = Object.keys(todosObj).map(todoId => ({
+          id: todoId,
+          todo: store.Todo.get(todoId) || store.Done.get(todoId),
+          tomatos: todosObj[todoId],
+        }));
+        const todoHTMLs = todosArr.map((todo) => {
+          const todoTomatoHTMLs = todo.tomatos
+            .map(() => '<img class="modal-tomato" src="./assets/tomato.svg"/>');
+
+          return `
+            <li class="modal-li">
+              <div class="modal-todo">
+                ${todo.todo ? todo.todo.content : '<del>Deleted TODO</del>'}
+              </div>
+
+              ${todoTomatoHTMLs.join('')}
+            </li>
+          `;
+        });
+        modal.style.display = 'block';
+        modalContent.innerHTML = `
+          <h1 class="modal-heading">Tomato Details of ${date}</h1>
+          ${todoHTMLs.join('')}
+        `;
       } else {
-        elems[i].attachEvent('onmouseover', mouseOver);
-        elems[i].attachEvent('onmouseout', mouseOut);
+        modal.style.display = 'block';
+        modalContent.innerHTML = '<h1 class="modal-heading">No tomato today</h1>';
       }
-    }
+    };
+
+    // hide modal
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    Array.from(elems).forEach((elem) => {
+      elem.addEventListener('mouseover', mouseOver);
+      elem.addEventListener('mouseout', mouseOut);
+      elem.addEventListener('click', mouseClick);
+    });
   }
 
   tooltipInit();

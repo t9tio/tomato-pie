@@ -35,6 +35,12 @@ hr {
   border-radius: 3px;
 }
 
+.cg-day {
+  &:hover {
+    cursor: pointer;
+  };
+}
+
 // for calender hover
 #tooltip {
   display: none;

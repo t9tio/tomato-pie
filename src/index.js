@@ -2,6 +2,7 @@ import './styles/index.scss';
 import './styles/todo.scss';
 import './styles/switch.scss';
 import './styles/statics.scss';
+import './styles/modal.scss';
 import './util/generateClockAnimations';
 
 import minuteAnimation from './util/minuteAnimation';

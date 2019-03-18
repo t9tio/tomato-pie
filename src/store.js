@@ -136,6 +136,13 @@ const Tomato = {
 };
 
 const Todo = {
+  get: (id) => {
+    const all = JSON.parse(localStorage.getItem('todoList'));
+    if (!all) return null;
+    const theOne = all.filter(todo => Number(todo.createdAt) === Number(id))[0];
+    if (!theOne) return null;
+    return theOne;
+  },
   getAll: () => {
     const all = JSON.parse(localStorage.getItem('todoList'));
     if (!all) return [];
@@ -179,6 +186,13 @@ const Todo = {
 };
 
 const Done = {
+  get: (id) => {
+    const all = JSON.parse(localStorage.getItem('doneList'));
+    if (!all) return null;
+    const theOne = all.filter(todo => Number(todo.createdAt) === Number(id))[0];
+    if (!theOne) return null;
+    return theOne;
+  },
   getAll: () => JSON.parse(localStorage.getItem('doneList')),
   remove: (createdAt) => {
     const cur = JSON.parse(localStorage.getItem('doneList'));
