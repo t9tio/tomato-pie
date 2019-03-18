@@ -14,8 +14,8 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
 ## Features
 
 - start new pomodoro from TODO list
-- green part: 25 minutes for one tomato
-- red part: 5 minutes for rest
+- red part: 25 minutes for one tomato
+- green part: 5 minutes for rest
 - show tomatoes of last 12 hours on clock
 - view tomato history on calendar
 - override default page for new tab
