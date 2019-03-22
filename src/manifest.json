@@ -4,7 +4,7 @@
     "homepage_url": "https://github.com/t9tio/tomato-pie",
     "name": "Tomato Pie",
     "description": "A new UI for Pomodoro Technique. Schedule your time with a clock",
-    "version": "1.7",
+    "version": "2.0",
     "icons": {
         "128": "assets/tomato.png"
     },

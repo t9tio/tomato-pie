@@ -119,14 +119,15 @@ hr {
   background-attachment:local;
   // ref; https://css-tricks.com/fun-line-height/
   line-height: 30px; //注意行高要和背景图高度一致resize: none;
-  background: repeating-linear-gradient(rgba(221, 221, 221, 0.53), rgba(221, 221, 221, 0.53) 1px, transparent 1px, transparent 30px) repeat;
+  background: repeating-linear-gradient(transparent, transparent 1px, transparent 29px, rgba(221, 221, 221, 0.8) 30px) repeat;
 
+  &::placeholder {
+    color: rgba(221, 221, 221, 1);
+    text-align: left;
+  }
 }
 
-::placeholder {
-  color: #ccc;
-  text-align: left;
-}
+
 
 .textarea-title {
   position: fixed;
