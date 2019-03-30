@@ -2,9 +2,9 @@ $distance-to-edge: 15px;
 
 #todo-div {
   width: 450px;
-  position: fixed;
-  left: $distance-to-edge;
-  top: $distance-to-edge;
+  // position: fixed;
+  margin-left: $distance-to-edge;
+  margin-top: $distance-to-edge;
   // margin: $distance-to-edge;
   // transform: scale(1.1, 1.1);
   // transform-origin: left;
