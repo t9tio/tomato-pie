@@ -3,6 +3,8 @@
   <img height="230" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie-header.gif">
 </p>
 
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/t9tio)
+
 # Tomato Pie
 
 A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). Schedule your time with a clock.
