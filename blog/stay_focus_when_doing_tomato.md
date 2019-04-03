@@ -24,5 +24,6 @@ The next feature I want to implement is to support more than one todo list, stay
 
 ## Interested?
 
-- Install tomato-pie from chrome web store: https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi
-- Join t9t.io's community in spectrum: https://spectrum.chat/t9tio
+- [Install tomato-pie from chrome web store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi)
+- [Join t9t.io's community in spectrum](https://spectrum.chat/t9tio)
+- [Join t9t.io's wechat group](https://user-images.githubusercontent.com/5512552/40399903-53d1ebde-5e72-11e8-98d8-615fc40c09f1.jpeg)
