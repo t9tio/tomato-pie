@@ -28,9 +28,21 @@ $distance-to-edge: 15px;
       width: 450px;
       margin: 0;
       border: 0;
+
+      &.is-hide {
+        color: transparent;
+        text-shadow: #aaa 0 0 3px;
+        transition: 0.4s;
+      }
+      &.is-focusing {
+        font-weight: bold;
+      }
+
       &:hover {
         background-color: rgba(238, 238, 238, 0.473);
         cursor: move;
+        color: #000;
+        text-shadow: none;
       }
       &.chosen {
         background-color: white;

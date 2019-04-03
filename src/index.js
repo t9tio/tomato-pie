@@ -153,3 +153,15 @@ const textarea = document.querySelector('.textarea');
 textarea.value = store.Textarea.get();
 
 textarea.addEventListener('input', () => store.Textarea.set(textarea.value));
+
+// check if current tomato is done
+
+let lastCurrentStartAt = store.CurrentStartAt.get();
+setInterval(() => {
+  const currentStartAt = store.CurrentStartAt.get();
+  if (lastCurrentStartAt && !currentStartAt) {
+    window.location.reload();
+  }
+  console.log(lastCurrentStartAt, currentStartAt);
+  lastCurrentStartAt = currentStartAt;
+}, 2000);

@@ -69,20 +69,31 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
 
   // show todo list
   const ul = document.getElementById('list');
+
   const todoHTMLs = todoList.map((todo) => {
+    let isDoingThisTomato = false;
     const todoTomatoHTMLs = tomatoesLast12H
       .filter(tomato => tomato.todoId === todo.createdAt)
       .map((tomato) => {
         const now = new Date();
         if (tomato.startAt === currentStartAt
           && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
+          isDoingThisTomato = true;
           return '<img class="todo-tomato" src="./assets/onGoingTomato.svg"/>';
         }
         return '<img class="todo-tomato" src="./assets/tomato.svg"/>';
       });
 
+    let liClass = '';
+    if (currentStartAt) {
+      if (isDoingThisTomato) {
+        liClass = 'is-focusing';
+      } else {
+        liClass = 'is-hide';
+      }
+    }
     return `
-      <li id="todo-${todo.createdAt}">
+      <li id="todo-${todo.createdAt}" class="${liClass}">
         <input type="checkbox" ${todo.isDone ? 'checked' : ''} class="checkbox"></input>
         <div class="content-div ${todo.isDone ? 'done' : ''}" contenteditable="true">
             ${todo.content}
@@ -146,6 +157,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
     addTomatoBtn.addEventListener('click', async () => {
       const lastCurrentStartAt = await store.CurrentStartAt.get();
       const startTime = new Date().getTime();
+
       async function startNewTomato() {
         await store.Tomato.push({
           startAt: startTime,
@@ -162,6 +174,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
         minuteAnimation.show(startTime);
         backgroundPage.startTimer();
       }
+
       if (lastCurrentStartAt && lastCurrentStartAt > startTime - 1000 * 60 * 25) {
         // ask user if he want to abandon last tomato
         const isConfimed = window.confirm('You are doing a tomato now, if you start a new one, the current one will be abandoned.');
