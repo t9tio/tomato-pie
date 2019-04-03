@@ -22,6 +22,8 @@ In most circumstance, After you start a tomato of a todo. You should close the t
 
 The next feature I want to implement is to support more than one todo list, stay tuned!
 
+![](https://raw.githubusercontent.com/timqian/images/master/reminder_multiple_list.gif)
+
 ## Interested?
 
 - [Install tomato-pie from chrome web store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi)
