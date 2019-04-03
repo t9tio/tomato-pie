@@ -3,7 +3,7 @@
 ## The idea
 
 Recently I was reading the book [Getting Things Done
-](https://en.wikipedia.org/wiki/Getting_Things_Done) by [David Allen](https://en.wikipedia.org/wiki/David_Allen_(author)) in order to be more efficient on my work. One impressive point this book addressed out is to focusing on "next action" instead of thinking about many stuff at the same time. In this way, you become more focused; more efficient; and feel less stress.
+](https://en.wikipedia.org/wiki/Getting_Things_Done) by [David Allen](https://en.wikipedia.org/wiki/David_Allen_(author)) in order to be more efficient on my work. One impressive point this book addressed out is to focusing on "next action" instead of thinking about many stuff at the same time. After you have collected all the tasks you need to do and ordered them in your todo list. The next thing you should do is to focusing one "next action" instead of worrying other tasks. In this way, you become more focused; more efficient; and feel less stress.
 
 ## The major feature
 
@@ -24,5 +24,5 @@ The next feature I want to implement is to support more than one todo list, stay
 
 ## Interested?
 
-Install tomato-pie from chrome web store: https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi
-Join t9t.io's community in spectrum: https://spectrum.chat/t9tio
+- Install tomato-pie from chrome web store: https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi
+- Join t9t.io's community in spectrum: https://spectrum.chat/t9tio
