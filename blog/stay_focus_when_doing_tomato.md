@@ -18,7 +18,7 @@ In most circumstance, After you start a tomato of a todo. You should close the t
 - add a new feedback channel (https://spectrum.chat/t9tio)
 - fix a bug: after tomato is done, tomato color and clock style is not right if user do not refresh the page
 
-## Next action of tomato-pie
+## "Next action" of tomato-pie
 
 The next feature I want to implement is to support more than one todo list, stay tuned!
 
