@@ -16,5 +16,5 @@ Tomato Pie 的两个主要部分是 todo list 和 “tomato-pie”（时钟周�
 
 ## 其他更新
 
-- 用户可以选择关闭或打开 focusing mode
+- 用户可以选择关闭或打开 [focusing mode](./stay_focus_when_doing_tomato-cn.md)
 - 用户设置也移至了侧边栏

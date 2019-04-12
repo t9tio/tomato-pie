@@ -18,5 +18,5 @@ For simple use case, you can just ignore this feature and use tomato-pie as if t
 
 ## Other updates
 
-- User is able to turn on/off focusing mode now.\
+- User is able to turn on/off [focusing mode](./stay_focus_when_doing_tomato.md) now.
 - The setting is moved to sidebar
