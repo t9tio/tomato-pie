@@ -3,7 +3,9 @@ import './styles/todo.scss';
 import './styles/switch.scss';
 import './styles/statics.scss';
 import './styles/modal.scss';
+import './styles/listsMenu.scss';
 import './util/generateClockAnimations';
+import './util/showSidebar';
 
 import minuteAnimation from './util/minuteAnimation';
 import generateCalender from './util/generateCalender';
@@ -12,10 +14,6 @@ import showTodoListAndTomatoes from './util/showTodoListAndTomatoes';
 
 // decide if show tomato-pie or default page
 const isDefaultNewTab = store.DefaultNewTab.get();
-
-if (isDefaultNewTab === null) {
-  store.DefaultNewTab.set(true);
-}
 
 if (!window.location.hash && isDefaultNewTab === false) {
   chrome.tabs.update({ url: 'chrome-search://local-ntp/local-ntp.html' });
@@ -37,9 +35,7 @@ generateCalender();
 
 // show todoList and tomatoes
 async function showTodosAndTomatoes() {
-  const tomatoesLast12H = await store.Tomato.get12h();
-  const todoList = await store.Todo.getAll();
-  await showTodoListAndTomatoes(todoList, tomatoesLast12H);
+  await showTodoListAndTomatoes();
 }
 showTodosAndTomatoes();
 
@@ -59,12 +55,12 @@ async function addTodoFromInput() {
     alert('Please type in content before adding todo');
     return;
   }
-  const newList = await store.Todo.push({
+  await store.Todo.push({
     createdAt: new Date().getTime(),
     content,
+    tag: store.SelectedTag.get(),
   });
-  const tomatoes = await store.Tomato.get12h();
-  await showTodoListAndTomatoes(newList, tomatoes);
+  await showTodoListAndTomatoes();
 
   document.getElementById('input').value = '';
 }
@@ -85,11 +81,13 @@ const textareaDiv = document.querySelector('.textarea-div');
 const calToggle = document.querySelector('#cb1');
 const texToggle = document.querySelector('#cb2');
 const defToggle = document.querySelector('#cb3');
+const focusToggle = document.querySelector('#cb4');
 
 function renderCalTexAccordingToStore() {
   const isShowCal = store.ShowStatics.get();
   const isShowTex = store.ShowTextarea.get();
   const isDefaultTab = store.DefaultNewTab.get();
+  const isFocusingMode = store.FocusingMode.get();
 
   if (isShowCal) {
     calenderDiv.classList.remove('invisible');
@@ -106,6 +104,7 @@ function renderCalTexAccordingToStore() {
   }
 
   defToggle.checked = isDefaultTab;
+  focusToggle.checked = isFocusingMode;
 }
 
 renderCalTexAccordingToStore();
@@ -125,24 +124,14 @@ defToggle.addEventListener('click', () => {
   renderCalTexAccordingToStore();
 });
 
+focusToggle.addEventListener('click', () => {
+  store.FocusingMode.set(focusToggle.checked);
+  renderCalTexAccordingToStore();
+  showTodoListAndTomatoes();
+});
+
 // show info
-const showInfoImg = document.querySelector('.show-info');
 const infoDiv = document.querySelector('.info-div');
-
-// hide setting page ref: https://stackoverflow.com/a/153047
-document.addEventListener('click', () => {
-  infoDiv.classList.add('invisible');
-});
-
-showInfoImg.addEventListener('click', (event) => {
-  event.stopPropagation();
-
-  if (Array.from(infoDiv.classList).includes('invisible')) {
-    infoDiv.classList.remove('invisible');
-  } else {
-    infoDiv.classList.add('invisible');
-  }
-});
 
 infoDiv.addEventListener('click', (event) => {
   event.stopPropagation();
@@ -155,13 +144,11 @@ textarea.value = store.Textarea.get();
 textarea.addEventListener('input', () => store.Textarea.set(textarea.value));
 
 // check if current tomato is done
-
 let lastCurrentStartAt = store.CurrentStartAt.get();
 setInterval(() => {
   const currentStartAt = store.CurrentStartAt.get();
   if (lastCurrentStartAt && !currentStartAt) {
     window.location.reload();
   }
-  console.log(lastCurrentStartAt, currentStartAt);
   lastCurrentStartAt = currentStartAt;
 }, 2000);

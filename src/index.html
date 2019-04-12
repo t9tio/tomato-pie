@@ -59,11 +59,93 @@
     </div>
   </div>
 
+  <div class="sidebar">
+    <div class="lists-div">
+      <a class="all-todo-a"><strong>All Todos</strong></a>
+      <h2>Categories</h2>
+      <div class="lists-list">
+        <a class="selected">Todo List</a>
+        <a>Tomato pie</a>
+      </div>
+
+      <input class="add-tag-input invisible" />
+
+      <a class="add-tag-div">
+        <img class="add-btn" src="./assets/addTODO.svg" />
+        Add category
+      </a>
+    </div>
+
+    <hr />
+
+    <div class="settings-div">
+      <h2>Settings</h2>
+      <div class="info-div">
+        <ul>
+          <li>
+            <div style="display: inline-block;">
+              <input class="tgl tgl-light" id="cb1" type="checkbox" />
+              <label class="tgl-btn" for="cb1"></label>
+            </div>
+            <img
+              class="setting-ico"
+              src="./assets/staticsIco.svg"
+              placeholder="info"
+            />
+            Calendar
+          </li>
+          <li>
+            <div style="display: inline-block;">
+              <input class="tgl tgl-light" id="cb2" type="checkbox" />
+              <label class="tgl-btn" for="cb2"></label>
+            </div>
+            <img
+              class="setting-ico"
+              src="./assets/textareaIco.svg"
+              placeholder="info"
+            />
+            Text area
+          </li>
+          <li>
+            <div style="display: inline-block;">
+              <input class="tgl tgl-light" id="cb3" type="checkbox" />
+              <label class="tgl-btn" for="cb3"></label>
+            </div>
+            <img
+              class="setting-ico"
+              src="./assets/defaultIco.svg"
+              placeholder="info"
+            />
+            Default tab
+          </li>
+          <li>
+            <div style="display: inline-block;">
+              <input class="tgl tgl-light" id="cb4" type="checkbox" />
+              <label class="tgl-btn" for="cb4"></label>
+            </div>
+            <img
+              class="setting-ico"
+              src="./assets/focusing.svg"
+              placeholder="info"
+            />
+            Focusing mode
+          </li>
+        </ul>
+
+        <hr />
+        <div class="links">
+          <a href="https://github.com/t9tio/tomato-pie/tree/master/blog">News</a>
+          <a href="https://github.com/t9tio/tomato-pie/">About</a>
+          <a href="https://t9t.io/#contact">Feedbacks</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="open-sidebar-btn">&#9776;</div>
+
   <div id="todo-div">
-    <h1 id="todo-title">
-      <!-- Todo List <img id="toggle-unfinished" src="./assets/staticsIco.svg"/> -->
-      Todo List
-    </h1>
+    <h1 id="todo-title">Todo List</h1>
     <ul id="list"></ul>
     <div id="input-div">
       <input id="input" placeholder="" />
@@ -75,61 +157,20 @@
 
   <div id="tooltip">tool tip of calendar</div>
 
-  <div class="info-div invisible">
-    <ul>
-      <li>
-        <div style="display: inline-block;">
-          <input class="tgl tgl-light" id="cb1" type="checkbox" />
-          <label class="tgl-btn" for="cb1"></label>
-        </div>
-        <img class="setting-ico" src="./assets/staticsIco.svg" placeholder="info" /> 
-        Show statics
-      </li>
-      <li>
-        <div style="display: inline-block;">
-          <input class="tgl tgl-light" id="cb2" type="checkbox" />
-          <label class="tgl-btn" for="cb2"></label>
-        </div>
-        <img class="setting-ico" src="./assets/textareaIco.svg" placeholder="info" /> 
-        Show text area
-      </li>
-      <li>
-        <div style="display: inline-block;">
-          <input class="tgl tgl-light" id="cb3" type="checkbox"/>
-          <label class="tgl-btn" for="cb3"></label>
-        </div>
-        <img class="setting-ico" src="./assets/defaultIco.svg" placeholder="info" /> 
-        As default new tab 
-      </li>
-    </ul>
-    <hr/>
-      <ol>
-        <li>
-          <a href="https://github.com/t9tio/tomato-pie/">About</a>
-        </li>
-        <li>
-          <a href="https://github.com/t9tio/tomato-pie/issues">Feedback</a>
-        </li>
-        <li>
-          <a href="https://spectrum.chat/t9tio">Join the community</a>
-        </li>
-      </ol>
-    </div>
-
-    <div class="textarea-div invisible">
-      <!-- <h1 class="textarea-title">Text Area</h1> -->
-      <textarea class="textarea" placeholder="Here you can record thoughts, plans or anything you want" spellcheck="false"></textarea>
-    </div>
-  <img class="show-info" src="./assets/information.svg" placeholder="info" />
+  <div class="textarea-div invisible">
+    <textarea
+      class="textarea"
+      placeholder="Here you can record thoughts, plans or anything you want"
+      spellcheck="false"
+    ></textarea>
+  </div>
 
   <!-- The Modal -->
   <div id="myModal" class="modal">
-
     <!-- Modal content -->
     <div id="myModalContent" class="modal-content">
       <p>Some text in the Modal..</p>
     </div>
-
   </div>
 
   <script src="./index.js"></script>

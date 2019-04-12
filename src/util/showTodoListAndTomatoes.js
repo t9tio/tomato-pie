@@ -5,7 +5,10 @@ import minuteAnimation from './minuteAnimation';
 // communicate with background page: https://stackoverflow.com/a/11967860/4674834
 const backgroundPage = chrome.extension.getBackgroundPage();
 
-async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
+async function showTodoListAndTomatoes() {
+  const tomatoesLast12H = await store.Tomato.get12h();
+  const todoList = await store.Todo.getAll();
+
   const currentStartAt = await store.CurrentStartAt.get();
 
   // calculate tomato angle and display them
@@ -40,9 +43,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
           minuteAnimation.hide();
         }
 
-        const tomatoes12H = store.Tomato.get12h();
-
-        await showTodoListAndTomatoes(todoList, tomatoes12H);
+        await showTodoListAndTomatoes();
       }
     });
 
@@ -70,30 +71,39 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
   // show todo list
   const ul = document.getElementById('list');
 
-  const todoHTMLs = todoList.map((todo) => {
-    let isDoingThisTomato = false;
-    const todoTomatoHTMLs = tomatoesLast12H
-      .filter(tomato => tomato.todoId === todo.createdAt)
-      .map((tomato) => {
-        const now = new Date();
-        if (tomato.startAt === currentStartAt
-          && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
-          isDoingThisTomato = true;
-          return '<img class="todo-tomato" src="./assets/onGoingTomato.svg"/>';
-        }
-        return '<img class="todo-tomato" src="./assets/tomato.svg"/>';
-      });
+  // TODO: hide todo without tag
+  const todoHTMLs = todoList
+    .map((todo) => {
+      let isDoingThisTomato = false;
 
-    let liClass = '';
-    if (currentStartAt) {
-      if (isDoingThisTomato) {
-        liClass = 'is-focusing';
-      } else {
-        liClass = 'is-hide';
+      const todoTomatoHTMLs = tomatoesLast12H
+        .filter(tomato => tomato.todoId === todo.createdAt)
+        .map((tomato) => {
+          const now = new Date();
+          if (tomato.startAt === currentStartAt
+          && (now.getTime() - currentStartAt < 25 * 60 * 1000)) {
+            isDoingThisTomato = true;
+            return '<img class="todo-tomato" src="./assets/onGoingTomato.svg"/>';
+          }
+          return '<img class="todo-tomato" src="./assets/tomato.svg"/>';
+        });
+
+      let liClass = '';
+      const now = new Date();
+      if (now.getTime() - currentStartAt < 25 * 60 * 1000) {
+        if (isDoingThisTomato) {
+          liClass = 'is-highlighted';
+        } else {
+          liClass = store.FocusingMode.get() ? 'is-blurred' : '';
+        }
       }
-    }
-    return `
-      <li id="todo-${todo.createdAt}" class="${liClass}">
+
+      let isVisible = true;
+      const selectedTag = store.SelectedTag.get();
+      if (selectedTag && (selectedTag !== todo.tag)) isVisible = false;
+
+      return `
+      <li id="todo-${todo.createdAt}" class="${liClass} ${isVisible ? '' : 'invisible'}">
         <input type="checkbox" ${todo.isDone ? 'checked' : ''} class="checkbox"></input>
         <div class="content-div ${todo.isDone ? 'done' : ''}" contenteditable="true">
             ${todo.content}
@@ -105,7 +115,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
         <input type="image" class="rm-todo-btn" src="./assets/rmTODO.svg"/>
       </li>
     `;
-  });
+    });
   ul.innerHTML = todoHTMLs.join('');
 
   // sortable li;
@@ -116,12 +126,13 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
     ghostClass: 'ghost',
     onEnd: async (e) => {
       const { oldIndex, newIndex } = e;
-      const newTodoList = await store.Todo.move(oldIndex, newIndex);
-      await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
+      await store.Todo.move(oldIndex, newIndex);
+      await showTodoListAndTomatoes();
     },
   });
 
   // eventListeners
+  // TODO: refactoring: separate event handle with view? ref: https://stackoverflow.com/a/27373951/4674834
   todoList.forEach((todo) => {
     const li = document.querySelector(`#todo-${todo.createdAt}`);
 
@@ -165,9 +176,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
         });
 
         await store.CurrentStartAt.put(startTime);
-        const todos = await store.Todo.getAll();
-        const tomato12H = await store.Tomato.get12h();
-        await showTodoListAndTomatoes(todos, tomato12H);
+        await showTodoListAndTomatoes();
 
         chrome.browserAction.setBadgeText({ text: '25m' });
         chrome.browserAction.setBadgeBackgroundColor({ color: 'red' });
@@ -190,19 +199,19 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
     // rm todo
     // Question: rm corresponding tomato?
     rmTomatoBtn.addEventListener('click', async () => {
-      const newTodoList = await store.Todo.remove(todo.createdAt);
-      const newTomatoList = await store.Tomato.get12h();
-      await showTodoListAndTomatoes(newTodoList, newTomatoList);
+      await store.Todo.remove(todo.createdAt);
+      await showTodoListAndTomatoes();
     });
 
     // event listener for checkbox
     // mv todo from todoList to doneList
     const checkbox = document.querySelector(`#todo-${todo.createdAt} > input`);
     checkbox.addEventListener('click', async (e) => {
+      console.log('checked');
       e.preventDefault();
-      const newTodoList = await store.Todo.remove(todo.createdAt);
+      await store.Todo.remove(todo.createdAt);
       await store.Done.push(todo);
-      await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
+      await showTodoListAndTomatoes();
     });
 
     // content-div editable updating todo content
@@ -211,8 +220,7 @@ async function showTodoListAndTomatoes(todoList, tomatoesLast12H) {
       // hit enter
       if (e.inputType === 'insertParagraph' || (e.inputType === 'insertText' && e.data === null)) {
         // rerender the list to make sure user loose mouse focus
-        const newTodoList = await store.Todo.getAll();
-        await showTodoListAndTomatoes(newTodoList, tomatoesLast12H);
+        await showTodoListAndTomatoes();
       } else {
         const newContent = contentDiv.textContent;
         await store.Todo.update(todo.createdAt, newContent);

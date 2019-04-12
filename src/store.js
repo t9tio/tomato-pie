@@ -5,9 +5,13 @@
  *
  * isDefaultNewTab: boolean,
  *
+ * isFocusingMode: boolean,
+ *
  * isShowStatics: boolean,
  *
  * isShowTextarea: boolean,
+ *
+ * isShowSidebar: boolean,
  *
  * textareData: string,
  *
@@ -19,13 +23,21 @@
  * todoList: [{
  *   createdAt: 1533653542468, // also used as id
  *   content: "master css position",
+ *   tag: "Tomato Pie"
  * }]
  *
  * doneList: [{
  *   createdAt: 1533653542468, // also used as id
- *   doneAt: 1533653542468,
  *   content: "master css position",
+ *   tag: "",
  * }]
+ *
+ * tagList: [
+ *  "Todo List",
+ *  "Tomato Pie"
+ * ]
+ *
+ * selectedTag: "Todo List"
  */
 
 // null; true; false;
@@ -35,7 +47,7 @@ const DefaultNewTab = {
     const item = localStorage.getItem('isDefaultNewTab');
     if (item === 'true') return true;
     if (item === 'false') return false;
-    if (item === null) return null;
+    if (item === null) return true; // default true
     throw new Error('error getting boolean');
   },
   set: (boolean) => {
@@ -43,6 +55,45 @@ const DefaultNewTab = {
       localStorage.setItem('isDefaultNewTab', 'true');
     } else if (boolean === false) {
       localStorage.setItem('isDefaultNewTab', 'false');
+    } else {
+      throw new Error('error setting boolean, only allow true or false');
+    }
+  },
+};
+
+// null; true; false;
+const FocusingMode = {
+  get: () => {
+    const item = localStorage.getItem('isFocusingMode');
+    if (item === 'true') return true;
+    if (item === 'false') return false;
+    if (item === null) return true; // default true
+    throw new Error('error getting boolean');
+  },
+  set: (boolean) => {
+    if (boolean === true) {
+      localStorage.setItem('isFocusingMode', 'true');
+    } else if (boolean === false) {
+      localStorage.setItem('isFocusingMode', 'false');
+    } else {
+      throw new Error('error setting boolean, only allow true or false');
+    }
+  },
+};
+
+const ShowSidebar = {
+  get: () => {
+    const item = localStorage.getItem('isShowSidebar');
+    if (item === 'true') return true;
+    if (item === 'false') return false;
+    if (item === null) return null;
+    throw new Error('error getting boolean');
+  },
+  set: (boolean) => {
+    if (boolean === true) {
+      localStorage.setItem('isShowSidebar', 'true');
+    } else if (boolean === false) {
+      localStorage.setItem('isShowSidebar', 'false');
     } else {
       throw new Error('error setting boolean, only allow true or false');
     }
@@ -148,6 +199,10 @@ const Todo = {
     if (!all) return [];
     return all;
   },
+  setAll: (todos) => {
+    localStorage.setItem('todoList', JSON.stringify(todos));
+    return todos;
+  },
   remove: (createdAt) => {
     const cur = JSON.parse(localStorage.getItem('todoList'));
     const next = cur.filter(todo => todo.createdAt !== createdAt);
@@ -213,9 +268,77 @@ const Done = {
   },
 };
 
+const Tag = {
+  getAll: () => {
+    const all = JSON.parse(localStorage.getItem('tagList'));
+    // Todos with out tag belong to this list
+    // If "Todo List" is renamed, all the todos with no tag will be taged with the new name
+    // Init tag list if user don't have one
+    if (!all) {
+      return [];
+      // const next = ['Todo List'];
+      // localStorage.setItem('tagList', JSON.stringify(next));
+      // return next;
+    }
+    return all;
+  },
+  remove: (i) => {
+    const cur = JSON.parse(localStorage.getItem('tagList'));
+    cur.splice(i, 1);
+    localStorage.setItem('tagList', JSON.stringify(cur));
+    return cur;
+  },
+  push: (name) => {
+    const cur = JSON.parse(localStorage.getItem('tagList'));
+    let next;
+    if (!cur) {
+      next = [name];
+    } else {
+      // check duplication
+      if (cur.includes(name)) {
+        throw new Error('same tag name not allowed');
+      }
+      next = cur.concat(name);
+    }
+    localStorage.setItem('tagList', JSON.stringify(next));
+    return next;
+  },
+  update: (i, newName) => {
+    const cur = JSON.parse(localStorage.getItem('tagList'));
+    cur[i] = newName;
+    localStorage.setItem('tagList', JSON.stringify(cur));
+    return cur;
+  },
+  move: (oldIndex, newIndex) => {
+    const cur = JSON.parse(localStorage.getItem('tagList'));
+    const [oldTodo] = cur.splice(oldIndex, 1);
+    cur.splice(newIndex, 0, oldTodo);
+    const next = cur;
+    localStorage.setItem('tagList', JSON.stringify(next));
+    return next;
+  },
+};
+
+const SelectedTag = {
+  get: () => {
+    const cur = localStorage.getItem('selectedTag');
+    // if (!cur) {
+    //   localStorage.setItem('selectedTag', 'Todo List');
+    //   return 'Todo List';
+    // }
+    return cur;
+  },
+  set: (tag) => {
+    localStorage.setItem('selectedTag', tag);
+    return tag;
+  },
+};
+
 // TODO: todo tags??
 export default {
   DefaultNewTab,
+  FocusingMode,
+  ShowSidebar,
   ShowStatics,
   ShowTextarea,
   Textarea,
@@ -223,4 +346,6 @@ export default {
   Tomato,
   Todo,
   Done,
+  Tag,
+  SelectedTag,
 };

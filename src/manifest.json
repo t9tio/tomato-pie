@@ -3,8 +3,8 @@
     "author": "timqian",
     "homepage_url": "https://github.com/t9tio/tomato-pie",
     "name": "Tomato Pie",
-    "description": "A new UI for Pomodoro Technique. Schedule your time with a clock",
-    "version": "2.2",
+    "description": "A new UI for Pomodoro Technique. Schedule your time within a clock",
+    "version": "2.3",
     "icons": {
         "128": "assets/tomato.png"
     },

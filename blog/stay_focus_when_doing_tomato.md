@@ -1,4 +1,6 @@
-# Updates in version 2.2
+> [中文](./stay_focus_when_doing_tomato-cn.md)
+
+# Introducing focusing mode (v2.2 release)
 
 ## The idea
 

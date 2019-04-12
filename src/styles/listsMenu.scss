@@ -1,0 +1,169 @@
+$sidebar-width: 150px;
+
+body {
+  transition: margin-left 0.3s;
+
+  &.body-pushed {
+    margin-left: $sidebar-width; //- 27px;
+  }
+}
+
+.sidebar {
+  height: 100%;
+  width: 0; // 0 width - change this with JavaScript
+  position: fixed; // Stay in place
+  color: #555;
+  top: 0;
+  left: 0;
+  background-color: rgb(245, 245, 245);
+  overflow-x: hidden; // Disable horizontal scroll
+  padding-top: 48px;
+  transition: 0.3s;
+
+  &.sidebar-pushed {
+    width: $sidebar-width;
+    border-right: 1px;
+    border-color: rgba(216, 216, 216, 0.068);
+  }
+
+  hr {
+    margin: 6px 10px;
+    border-top: 1px solid #ddd;
+  }
+
+  .add-tag-input {
+    white-space: nowrap;
+    margin: 5px 8px 5px 20px;
+    width: 110px;
+  }
+}
+
+.open-sidebar-btn {
+  z-index: 100;
+  font-size: 20px;
+  cursor: pointer;
+  border: 0;
+  position: fixed;
+  left: 14px;
+  top: 16px;
+  display: inline-block;
+  // height: 1.3rem;
+  // width: 1.3rem;
+  // background-color: rgb(221, 217, 217);
+  transition: 0.3s;
+
+  &.sidebar-opened {
+    left: 10px;
+  }
+}
+
+.lists-div {
+  // padding-left: 10px;
+  // border-top: solid 3px #ddd;
+  h2 {
+    // font-size: 14px;
+    margin: 0;
+    padding: 10px 10px 5px 10px;
+  }
+
+  .all-todo-a {
+    display: block;
+    white-space: nowrap;
+    padding: 5px 8px 5px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d3d3d336;
+    }
+
+    &.selected {
+      background-color: #d3d3d396;
+    }
+  }
+
+  .lists-list {
+    a {
+      position: relative;
+      display: block;
+      white-space: nowrap;
+      padding: 5px 8px 5px 20px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #d3d3d336;
+      }
+
+      &.selected {
+        background-color: #d3d3d396;
+      }
+    }
+
+    .edit-tag-btn {
+      position: absolute;
+      right: 3px;
+      top: 5px;
+      width: 15px;
+    }
+
+    .remove-tag-btn {
+      position: absolute;
+      right: 20px;
+      top: 5px;
+      width: 15px;
+    }
+  }
+
+  .add-tag-div {
+    display: block;
+    white-space: nowrap;
+    padding: 15px 8px 5px 20px;
+    cursor: pointer;
+  }
+
+  .add-btn {
+    width: 10px;
+  }
+}
+
+.settings-div {
+  width: 100%;
+  position: absolute;
+  display: block;
+  white-space: nowrap;
+  left: 0;
+  bottom: 5px;
+
+  h2 {
+    // font-size: .9em;
+    margin: 0;
+    padding: 10px 10px 5px 10px;
+  }
+}
+
+.info-div {
+  line-height: 1.6;
+  color: #888;
+  width: 100%;
+
+  ul {
+    margin: 0;
+    padding-left: 10px;
+    list-style-type: none;
+
+    li {
+      padding-top: 5px;
+    }
+  }
+
+  a {
+    color: #7bc96f;
+    text-decoration: none;
+  }
+
+  .links {
+    margin: 0;
+    padding-left: 10px;
+    // text-align: right;
+    list-style-type: none;
+  }
+}
