@@ -2,7 +2,7 @@
 
 ## About Tomato Pie
 
-The two major part of tomato-pie is the todo list and the "tomato-pie"(tomatoes around a clock). User can start a tomato of a todo and the tomato history is shown directly around the clock. Which provide a rough measurement of your working status of last 12 hours.
+The two major part of tomato-pie is the todo list and the "tomato-pie"(the clock with tomatoes around). User can start a tomato of a todo and the tomato history is shown directly around the clock. Which provide a rough measurement of your working status of last 12 hours.
 
 ![](https://raw.githubusercontent.com/timqian/images/master/about-tomato-pie.gif)
 

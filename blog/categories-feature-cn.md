@@ -2,7 +2,7 @@
 
 ## 关于 Tomato Pie
 
-Tomato Pie 的两个主要部分是 todo list 和 “tomato-pie”（时钟周围围绕的番茄）。用户可以从 todo 启动番茄，然后番茄的历史的围绕在时钟周围，提供了对过去12小时工作状态粗略但直观的估计。
+Tomato Pie 的两个主要部分是 todo list 和 “tomato-pie”（周围围绕着番茄的时钟）。用户可以从 todo 启动番茄，然后番茄的历史的围绕在时钟周围，提供了对过去12小时工作状态粗略但直观的估计。
 
 ![](https://raw.githubusercontent.com/timqian/images/master/about-tomato-pie.gif)
 
