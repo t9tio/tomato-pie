@@ -3,7 +3,7 @@
   <img height="230" src="https://raw.githubusercontent.com/timqian/images/master/tomatopie-header.gif">
 </p>
 
-[![Join us](https://badgen.net/badge/Join%20the%20community/Get%20in%20touch/F95428)](https://t9t.io/#contact)
+[![Join us](https://badgen.net/badge/Join%20the%20community%20of%20t9t.io/Get%20in%20touch/green)](https://t9t.io/#contact)
 
 # Tomato Pie
 
