@@ -7,7 +7,7 @@
 
 # Tomato Pie
 
-A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). Schedule your time with a clock.
+A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Technique). Peek into your working status with ease.
 
 ## Install
 
