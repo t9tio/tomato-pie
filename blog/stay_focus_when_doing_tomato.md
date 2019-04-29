@@ -11,7 +11,7 @@ Recently I was reading the book [Getting Things Done
 
 I add a new feature to tomato-pie: to blur other todos when you are doing a tomato about certain todo.
 
-In most circumstance, After you start a tomato of a todo. You should close the tomato-pie tab and focusing on your work. But some times, when you return back to check what you are doing, you might got disrupted by other todos listed aroud it. By blur other todos, it helps user to be more focused on current task.
+In most circumstance, After you start a tomato of a todo. You should close the tomato-pie tab and focusing on your work. But some times, when you return back to check what you are doing, you might got disrupted by other todos listed around it. By blur other todos, it helps user to be more focused on current task.
 
 ![](https://raw.githubusercontent.com/timqian/images/master/focusing_mode.gif)
 
