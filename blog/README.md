@@ -4,8 +4,7 @@
 
 - Assign colors to categories
 
-![](https://raw.githubusercontent.com/timqian/images/master/20190830151632.gif)
-
+<img src="https://raw.githubusercontent.com/timqian/images/master/20190830151632.gif" alt="category color" height="300">
 
 ### What feature do you want me to implement first
 
