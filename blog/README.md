@@ -2,7 +2,7 @@
 
 ### 2019-08-30: Assign colors to categories
 
-Each category have a color property now, this might help you recogonize which category the todo belongs to when you are browsering all todos.
+Each category has a color now! This might help you recogonize which category the todo belongs to when you are browsering all todos.
 
 <img src="https://raw.githubusercontent.com/timqian/images/master/20190830151632.gif" alt="category color" height="300">
 
