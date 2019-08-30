@@ -1,6 +1,6 @@
 ## Updates
 
-### 2019-08-30 Assign colors to categories
+### 2019-08-30: Assign colors to categories
 
 Each category have a color property now, this might help you recogonize which category the todo belongs to when you are browsering all todos.
 

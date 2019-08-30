@@ -3,6 +3,17 @@ import store from './store';
 // adjust time speed
 const oneMinute = 60 * 1000;
 
+// update message
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.notifications.create('noti_id_update', {
+    type: 'basic',
+    iconUrl: 'assets/tomato.png',
+    title: 'Tomato-pie updated',
+    message: 'click to see update details',
+    requireInteraction: true, // do not close until click
+  });
+});
+
 // open new tab when click icon; ref: https://stackoverflow.com/a/14682627/4674834
 chrome.browserAction.onClicked.addListener(() => {
   window.focus();
@@ -11,9 +22,15 @@ chrome.browserAction.onClicked.addListener(() => {
 
 // open new tab when click notification
 chrome.notifications.onClicked.addListener((notificationId) => {
-  window.focus();
-  chrome.tabs.create({ url: chrome.extension.getURL('index.html#from_action') });
-  chrome.notifications.clear(notificationId);
+  if (notificationId === 'noti_id_update') {
+    window.focus();
+    chrome.tabs.create({ url: chrome.extension.getURL('https://github.com/t9tio/tomato-pie/tree/master/blog#updates') });
+    chrome.notifications.clear(notificationId);
+  } else {
+    window.focus();
+    chrome.tabs.create({ url: chrome.extension.getURL('index.html#from_action') });
+    chrome.notifications.clear(notificationId);
+  }
 });
 
 let current = 25;
