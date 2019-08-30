@@ -1,6 +1,7 @@
 import Sortable from 'sortablejs';
 import store from '../store';
 import minuteAnimation from './minuteAnimation';
+import colors from '../colors';
 
 // communicate with background page: https://stackoverflow.com/a/11967860/4674834
 const backgroundPage = chrome.extension.getBackgroundPage();
@@ -102,9 +103,13 @@ async function showTodoListAndTomatoes() {
       const selectedTag = store.SelectedTag.get();
       if (selectedTag && (selectedTag !== todo.tag)) isVisible = false;
 
+      const tagsList = store.Tag.getAll();
+      const tagIndex = tagsList.indexOf(todo.tag);
+      const todoColor = store.TagColor.getAll()[tagIndex] || colors[tagIndex];
+
       return `
       <li id="todo-${todo.createdAt}" class="${liClass} ${isVisible ? '' : 'invisible'}">
-        <input type="checkbox" ${todo.isDone ? 'checked' : ''} class="checkbox"></input>
+        <input type="checkbox" ${todo.isDone ? 'checked' : ''} class="checkbox" style="border-color: ${todoColor}; background-color:${todoColor}09;"></input>
         <div class="content-div ${todo.isDone ? 'done' : ''}" contenteditable="true">
             ${todo.content}
         </div>

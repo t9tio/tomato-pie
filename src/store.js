@@ -37,6 +37,9 @@
  *  "Tomato Pie"
  * ]
  *
+ * tagColorList: [
+ * ]
+ *
  * selectedTag: "Todo List"
  */
 
@@ -271,15 +274,7 @@ const Done = {
 const Tag = {
   getAll: () => {
     const all = JSON.parse(localStorage.getItem('tagList'));
-    // Todos with out tag belong to this list
-    // If "Todo List" is renamed, all the todos with no tag will be taged with the new name
-    // Init tag list if user don't have one
-    if (!all) {
-      return [];
-      // const next = ['Todo List'];
-      // localStorage.setItem('tagList', JSON.stringify(next));
-      // return next;
-    }
+    if (!all) return [];
     return all;
   },
   remove: (i) => {
@@ -322,15 +317,26 @@ const Tag = {
 const SelectedTag = {
   get: () => {
     const cur = localStorage.getItem('selectedTag');
-    // if (!cur) {
-    //   localStorage.setItem('selectedTag', 'Todo List');
-    //   return 'Todo List';
-    // }
     return cur;
   },
   set: (tag) => {
     localStorage.setItem('selectedTag', tag);
     return tag;
+  },
+};
+
+const TagColor = {
+  getAll: () => {
+    const all = JSON.parse(localStorage.getItem('tagColorList'));
+    if (!all) return [];
+    return all;
+  },
+  update: (i, newName) => {
+    let cur = JSON.parse(localStorage.getItem('tagColorList'));
+    if (!cur) cur = [];
+    cur[i] = newName;
+    localStorage.setItem('tagColorList', JSON.stringify(cur));
+    return cur;
   },
 };
 
@@ -348,4 +354,5 @@ export default {
   Done,
   Tag,
   SelectedTag,
+  TagColor,
 };

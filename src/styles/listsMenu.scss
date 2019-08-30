@@ -44,7 +44,7 @@ body {
   cursor: pointer;
   border: 0;
   position: fixed;
-  left: 14px;
+  left: 17px;
   top: 16px;
   display: inline-block;
   // height: 1.3rem;
@@ -88,7 +88,6 @@ body {
       white-space: nowrap;
       padding: 5px 8px 5px 20px;
       cursor: pointer;
-
       &:hover {
         background-color: #d3d3d336;
       }
@@ -121,7 +120,7 @@ body {
   }
 
   .add-btn {
-    width: 10px;
+    width: 9px;
   }
 }
 

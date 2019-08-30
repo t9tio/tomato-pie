@@ -30,7 +30,7 @@
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
     "node-sass": "^4.11.0",
-    "parcel": "^1.11.0",
+    "parcel": "^1.12.3",
     "should": "^13.2.3"
   },
   "browserslist": [

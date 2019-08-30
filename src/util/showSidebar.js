@@ -1,5 +1,6 @@
 import store from '../store';
 import showTodoListAndTomatoes from './showTodoListAndTomatoes';
+import colors from '../colors';
 
 // show sidebar or not
 function addSidebar() {
@@ -62,26 +63,24 @@ function renderSidebar() {
     // document.querySelector('#todo-title').textContent = 'Todo List';
   });
 
-  const tagsHTMLs = tags.map((tag, i) => {
-    if (tag === selectedTag) {
-      return `<a class="tag-${i} selected">
-        ${tag}
-        <input type="image" class="edit-tag-btn invisible" src="./assets/edit.svg"/>
-        <input type="image" class="remove-tag-btn invisible" src="./assets/rmTODO.svg"/>
-      </a>`;
-    }
-    return `<a class="tag-${i}">
-      ${tag}
+  const tagColors = store.TagColor.getAll();
+  const tagsHTMLs = tags.map((tag, i) => `
+    <a class="tag-${i} ${tag === selectedTag ? 'selected' : ''}" style="position:relative;">
+      <label style="background-color: ${tagColors[i] || colors[i]}; height: 8px; width: 8px; position: absolute; bottom: 8px; border-radius: 10px; cursor: crosshair;">
+        <input class="tag-color-${i}" type="color" value="${tagColors[i] || colors[i]}" style="visibility: hidden;">
+      </label> 
+      <span style="margin-left: 12px;">${tag}</span>
       <input type="image" class="edit-tag-btn invisible" src="./assets/edit.svg"/>
       <input type="image" class="remove-tag-btn invisible" src="./assets/rmTODO.svg"/>
-    </a>`;
-  });
+    </a>
+  `);
 
   document.querySelector('.lists-list').innerHTML = tagsHTMLs.join('');
 
   // event listener
   tags.forEach((tag, i) => {
     const tagEl = document.querySelector(`.tag-${i}`);
+    const tagElColor = document.querySelector(`.tag-color-${i}`);
     const rmTagEl = document.querySelector(`.tag-${i} .remove-tag-btn`);
     const editTagEl = document.querySelector(`.tag-${i} .edit-tag-btn`);
 
@@ -97,6 +96,11 @@ function renderSidebar() {
     tagEl.addEventListener('mouseleave', () => {
       rmTagEl.classList.add('invisible');
       editTagEl.classList.add('invisible');
+    });
+    tagElColor.addEventListener('input', (event) => {
+      store.TagColor.update(i, event.target.value);
+      renderSidebar();
+      showTodoListAndTomatoes();
     });
     rmTagEl.addEventListener('click', () => {
       const isConfimed = window.confirm('Do you want to remove this category? \nNote: todos with this category will not be removed');
