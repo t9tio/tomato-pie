@@ -6,7 +6,7 @@ Each category have a color property now, this might help you recogonize which ca
 
 <img src="https://raw.githubusercontent.com/timqian/images/master/20190830151632.gif" alt="category color" height="300">
 
-### What feature do you want me to implement first?
+### What feature would you want to see first?
 
 [![](https://api.gh-polls.com/poll/01DKGPHBTAMR67XXDKPTPFB8PG/see%20finished%20todos%20by%20clicking%20todo%20list%20title)](https://api.gh-polls.com/poll/01DKGPHBTAMR67XXDKPTPFB8PG/see%20finished%20todos%20by%20clicking%20todo%20list%20title/vote)
 [![](https://api.gh-polls.com/poll/01DKGPHBTAMR67XXDKPTPFB8PG/todos%20today%20tab%20to%20plan%20for%20today's%20work)](https://api.gh-polls.com/poll/01DKGPHBTAMR67XXDKPTPFB8PG/todos%20today%20tab%20to%20plan%20for%20today's%20work/vote)
