@@ -10,6 +10,10 @@
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.85); /* Black w/ opacity */
+  a {
+    color: #7bc96f;
+    text-decoration: none;
+  }
 }
 
 /* Modal Content/Box */
@@ -26,28 +30,49 @@
   margin: 0;
   padding-bottom: 15px;
   border-bottom: solid 1px #ddd;
+  text-align: center;
 }
 
 .modal-li {
   // line-height: 30px;
   position: relative;
   font-size: 15px;
-  // list-style: none;
+  list-style: none;
   padding: 0;
   margin: 0;
   border: 0;
+  // margin-left: 20%;
+  // text-align: center;
 
   .modal-tomato {
     width: 15px;
     display: inline-block;
   }
 
+  .checkbox {
+    font-size: 13px;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: default;
+    vertical-align: top;
+    margin-top: 12px;
+    &:checked {
+      background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='15' width='15'><text x='2' y='12' fill='lightgray' font-size='13'>✓</text></svg>");
+    }
+  }
   .modal-todo {
     display: inline-block;
     width: 270px;
     border-bottom: solid 1px #ddd;
     padding-top: 10px;
     padding-bottom: 10px;
+    text-align: left;
   }
 }
 

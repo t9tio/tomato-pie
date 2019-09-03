@@ -1,5 +1,6 @@
 import { SVGGraph } from 'calendar-graph';
 import store from '../store';
+import colors from '../colors';
 
 /**
  * group object array by certain key
@@ -106,25 +107,41 @@ function generateCalender() {
           id: todoId,
           todo: store.Todo.get(todoId) || store.Done.get(todoId),
           tomatos: todosObj[todoId],
+          isDone: !!store.Done.get(todoId),
         }));
         const todoHTMLs = todosArr.map((todo) => {
           const todoTomatoHTMLs = todo.tomatos
             .map(() => '<img class="modal-tomato" src="./assets/tomato.svg"/>');
 
+          const tagsList = store.Tag.getAll();
+          const tagIndex = tagsList.indexOf(todo.todo.tag);
+          const todoColor = store.TagColor.getAll()[tagIndex] || colors[tagIndex];
           return `
             <li class="modal-li">
+              <input type="checkbox" class="checkbox" disabled style="border-color:${todoColor};" ${todo.isDone ? 'checked' : ''}/>
               <div class="modal-todo">
                 ${todo.todo ? todo.todo.content : '<del>Deleted TODO</del>'}
               </div>
 
               ${todoTomatoHTMLs.join('')}
+
             </li>
           `;
         });
         modal.style.display = 'block';
         modalContent.innerHTML = `
-          <h1 class="modal-heading">Tomato Details of ${date}</h1>
+          <h1 class="modal-heading">${date}</h1>
+          <br/>
           ${todoHTMLs.join('')}
+          <br/>
+          <hr/>
+          <footer style="text-align:left; font-size: 11px;">
+            I'm planing a bunch of <a href="https://github.com/t9tio/tomato-pie/issues/12">new features</a> for tomato-pie (including some <a href="https://patreon.com/timqian">patron</a> only ones).
+            
+            But I'm not sure if there are enough people interested in the updates.
+            
+            If you like tomato-pie and the possible updates, please consider supporting my development by being my <a href="https://patreon.com/timqian">patron</a>. Your patronage makes continued development possible. Thank you.
+          </footer>
         `;
       } else {
         modal.style.display = 'block';

@@ -13,6 +13,8 @@ A new UI for [Pomodoro Technique](https://en.wikipedia.org/wiki/Pomodoro_Techniq
 
 From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfajkbpinmjjjlkjfjampi) or [manually](https://github.com/t9tio/tomato-pie/releases)
 
+## [Recent updates](./blog)
+
 ## Features
 
 - start new pomodoro from TODO list
@@ -70,14 +72,6 @@ npm run build
   1. in`manifest.json`, add  `background` in `permission` key
   2. in `manifest.json`, don't add `persistence: false` in `background` key
 - clock animation: https://codepen.io/Alca/pen/ZeKjmB
-
-## Updates
-
-- 2019-03-07: add textarea; preventing notification disappearing #4
-
-## Plans
-
-- notify user when extension is updated [ref](https://developer.chrome.com/extensions/runtime#event-onInstalled)
 
 ## Thanks
 
