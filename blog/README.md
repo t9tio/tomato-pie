@@ -1,5 +1,7 @@
 ## Updates
 
+### 2019-10-22: fix update link
+
 ### 2019-10-22: hyperlinks parsing
 
 - clickable hyperlinks in todo

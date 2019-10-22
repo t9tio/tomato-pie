@@ -24,7 +24,7 @@ chrome.browserAction.onClicked.addListener(() => {
 chrome.notifications.onClicked.addListener((notificationId) => {
   if (notificationId === 'noti_id_update') {
     window.focus();
-    chrome.tabs.create({ url: chrome.extension.getURL('https://github.com/t9tio/tomato-pie/tree/master/blog#updates') });
+    chrome.tabs.create({ url: 'https://github.com/t9tio/tomato-pie/tree/master/blog#updates' });
     chrome.notifications.clear(notificationId);
   } else {
     window.focus();
