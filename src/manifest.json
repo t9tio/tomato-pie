@@ -4,7 +4,7 @@
     "homepage_url": "https://github.com/t9tio/tomato-pie",
     "name": "Tomato Pie",
     "description": "A new UI for Pomodoro Technique. Peek into your working status with ease",
-    "version": "2.6",
+    "version": "2.7",
     "icons": {
         "128": "assets/tomato.png"
     },

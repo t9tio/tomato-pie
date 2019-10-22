@@ -50,6 +50,7 @@ store ==> render function ==> view =update=> store
 ## Build and publish
 
 ```bash
+# update verision in src/manifest.json
 npm run build
 # zip dist file and upload to chrome webstore
 ```
