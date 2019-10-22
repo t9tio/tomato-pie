@@ -38,6 +38,7 @@ From [Chrome Web Store](https://chrome.google.com/webstore/detail/gffgechdocgfaj
 
 ## Develop
 
+1. `npm i`
 1. `npm start`
 1. Navigate to `chrome://extensions/`
 1. Click the `load unpacked` button and load `dist` folder

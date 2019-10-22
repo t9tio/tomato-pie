@@ -114,13 +114,20 @@ function generateCalender() {
             .map(() => '<img class="modal-tomato" src="./assets/tomato.svg"/>');
 
           const tagsList = store.Tag.getAll();
-          const tagIndex = tagsList.indexOf(todo.todo.tag);
-          const todoColor = store.TagColor.getAll()[tagIndex] || colors[tagIndex];
+
+          let todoColor;
+          let todoContent;
+          if (todo.todo) {
+            const tagIndex = tagsList.indexOf(todo.todo.tag);
+            todoColor = store.TagColor.getAll()[tagIndex] || colors[tagIndex];
+            todoContent = todo.todo.content;
+          }
+
           return `
             <li class="modal-li">
               <input type="checkbox" class="checkbox" disabled style="border-color:${todoColor};" ${todo.isDone ? 'checked' : ''}/>
               <div class="modal-todo">
-                ${todo.todo ? todo.todo.content : '<del>Deleted TODO</del>'}
+                ${todoContent || '<del>Deleted TODO</del>'}
               </div>
 
               ${todoTomatoHTMLs.join('')}
@@ -135,7 +142,7 @@ function generateCalender() {
           ${todoHTMLs.join('')}
           <br/>
           <hr/>
-          <footer style="text-align:left; font-size: 11px;">
+          <footer style="text-align:left; font-size: 11px; font-weight:300; color: #bbb;">
             I'm planing a bunch of <a href="https://github.com/t9tio/tomato-pie/issues/12">new features</a> for tomato-pie (including some <a href="https://patreon.com/timqian">patron</a> only ones).
             
             But I'm not sure if there are enough people interested in the updates.

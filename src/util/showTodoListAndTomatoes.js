@@ -110,9 +110,7 @@ async function showTodoListAndTomatoes() {
       return `
       <li id="todo-${todo.createdAt}" class="${liClass} ${isVisible ? '' : 'invisible'}">
         <input type="checkbox" ${todo.isDone ? 'checked' : ''} class="checkbox" style="border-color: ${todoColor}; background-color:${todoColor}09;"></input>
-        <div class="content-div ${todo.isDone ? 'done' : ''}" contenteditable="true">
-            ${todo.content}
-        </div>
+        <div class="content-div ${todo.isDone ? 'done' : ''}" contenteditable="true">${todo.content.replace(/(https?:\/\/[^\s]+)/g, "<a href='$1' contenteditable='false' class='links-in-todo' target='_blank'>$1</a>")}&nbsp;</div>
         <div class="todo-tomato-div">
           ${todoTomatoHTMLs.join('')}
         </div>

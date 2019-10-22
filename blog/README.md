@@ -1,5 +1,13 @@
 ## Updates
 
+### 2019-10-22: hyperlinks parsing
+
+- clickable hyperlinks in todo
+
+  <img src="https://raw.githubusercontent.com/timqian/images/master/20191022113307.gif" alt="category color" height="300">
+- bug fix: display bug for deleted todos on calendar
+- make donation message less eye-catching
+
 ### 2019-08-30: Assign colors to categories
 
 Each category has a color now! This might help you recogonize which category the todo belongs to when you are browsering all todos.

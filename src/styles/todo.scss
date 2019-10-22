@@ -170,3 +170,12 @@ $distance-to-edge: 15px;
     }
   }
 }
+
+.links-in-todo {
+  color: #07c;
+  text-decoration: none;
+}
+
+.links-in-todo:hover {
+  text-decoration: underline;
+}
