@@ -14,8 +14,7 @@
     "permissions": [
         "tabs",
         "storage",
-        "notifications",
-        "background"
+        "notifications"
     ],
     "background": {
         "scripts": [
